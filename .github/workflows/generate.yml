@@ -33,6 +33,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git -f add generated/
+          git add --force generated/
           git commit -m "Autogenerate protobuf" || echo "No changes"
           git push
