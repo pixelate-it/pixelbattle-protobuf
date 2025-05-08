@@ -20,11 +20,14 @@ jobs:
       - name: Checkout Branch
         uses: actions/checkout@v3
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           persist-credentials: false
+
+      - name: Install protobufjs
+        run: npm install -g protobufjs protobufjs-cli
 
       - name: Generate TypeScript
         run: |
-          npm install -g protobufjs protobufjs-cli
           chmod +x generate.sh
           ./generate.sh
 
