@@ -3,9 +3,11 @@ name: Generate Protobuf
 on:
   push:
     paths:
+      - '.github/workflows/generate.yml'
       - 'proto/**'
   pull_request:
     paths:
+      - '.github/workflows/generate.yml'
       - 'proto/**'
 
 permissions:
