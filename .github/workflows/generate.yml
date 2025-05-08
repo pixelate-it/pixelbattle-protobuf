@@ -1,0 +1,35 @@
+name: Generate Protobuf
+
+on:
+  push:
+    paths:
+      - 'proto/**'
+  pull_request:
+    paths:
+      - 'proto/**'
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Branch
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Generate TypeScript
+        run: |
+          npm install -g protobufjs protobufjs-cli
+          ./generate.sh
+
+      - name: Commit Changes
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add generated/
+          git commit -m "Autogenerate protobuf" || echo "No changes"
+          git push
