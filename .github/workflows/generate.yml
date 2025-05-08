@@ -23,6 +23,7 @@ jobs:
       - name: Generate TypeScript
         run: |
           npm install -g protobufjs protobufjs-cli
+          chmod +x generate.sh
           ./generate.sh
 
       - name: Commit Changes
