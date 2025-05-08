@@ -4,10 +4,12 @@ on:
   push:
     paths:
       - '.github/workflows/generate.yml'
+      - 'generate.sh'
       - 'proto/**'
   pull_request:
     paths:
       - '.github/workflows/generate.yml'
+      - 'generate.sh'
       - 'proto/**'
 
 permissions:
