@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+message Init {
+    string id = 1;
+}
+

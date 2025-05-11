@@ -1,22 +1,9 @@
 syntax = "proto3";
 
-package pixelbattle.pingpong;
-
-import "operations.proto";
-
 message Ping {
-    fixed64 timestamp = 1;
+    uint64 timestamp = 1;
 }
 
 message Pong {
-    fixed64 timestamp = 1;
-}
-
-message SocketMessage {
-    Operation op = 1; 
-
-    oneof payload {
-        Ping ping = 2;
-        Pong pong = 3; 
-    }
+    uint64 timestamp = 1;
 }
