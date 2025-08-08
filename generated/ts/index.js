@@ -9,24 +9,30 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 // Exported root namespace
 var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
-$root.Init = (function() {
+$root.Envelope = (function() {
 
     /**
-     * Properties of an Init.
-     * @exports IInit
-     * @interface IInit
-     * @property {string|null} [id] Init id
+     * Properties of an Envelope.
+     * @exports IEnvelope
+     * @interface IEnvelope
+     * @property {number|null} [id] Envelope id
+     * @property {number|Long|null} [timestamp] Envelope timestamp
+     * @property {number|null} [correlationId] Envelope correlationId
+     * @property {IPing|null} [ping] Envelope ping
+     * @property {IPong|null} [pong] Envelope pong
+     * @property {IPixel|null} [pixel] Envelope pixel
+     * @property {IError|null} [error] Envelope error
      */
 
     /**
-     * Constructs a new Init.
-     * @exports Init
-     * @classdesc Represents an Init.
-     * @implements IInit
+     * Constructs a new Envelope.
+     * @exports Envelope
+     * @classdesc Represents an Envelope.
+     * @implements IEnvelope
      * @constructor
-     * @param {IInit=} [properties] Properties to set
+     * @param {IEnvelope=} [properties] Properties to set
      */
-    function Init(properties) {
+    function Envelope(properties) {
         if (properties)
             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                 if (properties[keys[i]] != null)
@@ -34,326 +40,175 @@ $root.Init = (function() {
     }
 
     /**
-     * Init id.
-     * @member {string} id
-     * @memberof Init
+     * Envelope id.
+     * @member {number} id
+     * @memberof Envelope
      * @instance
      */
-    Init.prototype.id = "";
+    Envelope.prototype.id = 0;
 
     /**
-     * Creates a new Init instance using the specified properties.
-     * @function create
-     * @memberof Init
-     * @static
-     * @param {IInit=} [properties] Properties to set
-     * @returns {Init} Init instance
-     */
-    Init.create = function create(properties) {
-        return new Init(properties);
-    };
-
-    /**
-     * Encodes the specified Init message. Does not implicitly {@link Init.verify|verify} messages.
-     * @function encode
-     * @memberof Init
-     * @static
-     * @param {IInit} message Init message or plain object to encode
-     * @param {$protobuf.Writer} [writer] Writer to encode to
-     * @returns {$protobuf.Writer} Writer
-     */
-    Init.encode = function encode(message, writer) {
-        if (!writer)
-            writer = $Writer.create();
-        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
-            writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
-        return writer;
-    };
-
-    /**
-     * Encodes the specified Init message, length delimited. Does not implicitly {@link Init.verify|verify} messages.
-     * @function encodeDelimited
-     * @memberof Init
-     * @static
-     * @param {IInit} message Init message or plain object to encode
-     * @param {$protobuf.Writer} [writer] Writer to encode to
-     * @returns {$protobuf.Writer} Writer
-     */
-    Init.encodeDelimited = function encodeDelimited(message, writer) {
-        return this.encode(message, writer).ldelim();
-    };
-
-    /**
-     * Decodes an Init message from the specified reader or buffer.
-     * @function decode
-     * @memberof Init
-     * @static
-     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-     * @param {number} [length] Message length if known beforehand
-     * @returns {Init} Init
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    Init.decode = function decode(reader, length, error) {
-        if (!(reader instanceof $Reader))
-            reader = $Reader.create(reader);
-        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Init();
-        while (reader.pos < end) {
-            var tag = reader.uint32();
-            if (tag === error)
-                break;
-            switch (tag >>> 3) {
-            case 1: {
-                    message.id = reader.string();
-                    break;
-                }
-            default:
-                reader.skipType(tag & 7);
-                break;
-            }
-        }
-        return message;
-    };
-
-    /**
-     * Decodes an Init message from the specified reader or buffer, length delimited.
-     * @function decodeDelimited
-     * @memberof Init
-     * @static
-     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-     * @returns {Init} Init
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    Init.decodeDelimited = function decodeDelimited(reader) {
-        if (!(reader instanceof $Reader))
-            reader = new $Reader(reader);
-        return this.decode(reader, reader.uint32());
-    };
-
-    /**
-     * Verifies an Init message.
-     * @function verify
-     * @memberof Init
-     * @static
-     * @param {Object.<string,*>} message Plain object to verify
-     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-     */
-    Init.verify = function verify(message) {
-        if (typeof message !== "object" || message === null)
-            return "object expected";
-        if (message.id != null && message.hasOwnProperty("id"))
-            if (!$util.isString(message.id))
-                return "id: string expected";
-        return null;
-    };
-
-    /**
-     * Creates an Init message from a plain object. Also converts values to their respective internal types.
-     * @function fromObject
-     * @memberof Init
-     * @static
-     * @param {Object.<string,*>} object Plain object
-     * @returns {Init} Init
-     */
-    Init.fromObject = function fromObject(object) {
-        if (object instanceof $root.Init)
-            return object;
-        var message = new $root.Init();
-        if (object.id != null)
-            message.id = String(object.id);
-        return message;
-    };
-
-    /**
-     * Creates a plain object from an Init message. Also converts values to other types if specified.
-     * @function toObject
-     * @memberof Init
-     * @static
-     * @param {Init} message Init
-     * @param {$protobuf.IConversionOptions} [options] Conversion options
-     * @returns {Object.<string,*>} Plain object
-     */
-    Init.toObject = function toObject(message, options) {
-        if (!options)
-            options = {};
-        var object = {};
-        if (options.defaults)
-            object.id = "";
-        if (message.id != null && message.hasOwnProperty("id"))
-            object.id = message.id;
-        return object;
-    };
-
-    /**
-     * Converts this Init to JSON.
-     * @function toJSON
-     * @memberof Init
-     * @instance
-     * @returns {Object.<string,*>} JSON object
-     */
-    Init.prototype.toJSON = function toJSON() {
-        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-    };
-
-    /**
-     * Gets the default type url for Init
-     * @function getTypeUrl
-     * @memberof Init
-     * @static
-     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-     * @returns {string} The default type url
-     */
-    Init.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-        if (typeUrlPrefix === undefined) {
-            typeUrlPrefix = "type.googleapis.com";
-        }
-        return typeUrlPrefix + "/Init";
-    };
-
-    return Init;
-})();
-
-$root.SocketMessage = (function() {
-
-    /**
-     * Properties of a SocketMessage.
-     * @exports ISocketMessage
-     * @interface ISocketMessage
-     * @property {IInit|null} [init] SocketMessage init
-     * @property {IPing|null} [ping] SocketMessage ping
-     * @property {IPong|null} [pong] SocketMessage pong
-     */
-
-    /**
-     * Constructs a new SocketMessage.
-     * @exports SocketMessage
-     * @classdesc Represents a SocketMessage.
-     * @implements ISocketMessage
-     * @constructor
-     * @param {ISocketMessage=} [properties] Properties to set
-     */
-    function SocketMessage(properties) {
-        if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                if (properties[keys[i]] != null)
-                    this[keys[i]] = properties[keys[i]];
-    }
-
-    /**
-     * SocketMessage init.
-     * @member {IInit|null|undefined} init
-     * @memberof SocketMessage
+     * Envelope timestamp.
+     * @member {number|Long} timestamp
+     * @memberof Envelope
      * @instance
      */
-    SocketMessage.prototype.init = null;
+    Envelope.prototype.timestamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * SocketMessage ping.
+     * Envelope correlationId.
+     * @member {number} correlationId
+     * @memberof Envelope
+     * @instance
+     */
+    Envelope.prototype.correlationId = 0;
+
+    /**
+     * Envelope ping.
      * @member {IPing|null|undefined} ping
-     * @memberof SocketMessage
+     * @memberof Envelope
      * @instance
      */
-    SocketMessage.prototype.ping = null;
+    Envelope.prototype.ping = null;
 
     /**
-     * SocketMessage pong.
+     * Envelope pong.
      * @member {IPong|null|undefined} pong
-     * @memberof SocketMessage
+     * @memberof Envelope
      * @instance
      */
-    SocketMessage.prototype.pong = null;
+    Envelope.prototype.pong = null;
+
+    /**
+     * Envelope pixel.
+     * @member {IPixel|null|undefined} pixel
+     * @memberof Envelope
+     * @instance
+     */
+    Envelope.prototype.pixel = null;
+
+    /**
+     * Envelope error.
+     * @member {IError|null|undefined} error
+     * @memberof Envelope
+     * @instance
+     */
+    Envelope.prototype.error = null;
 
     // OneOf field names bound to virtual getters and setters
     var $oneOfFields;
 
     /**
-     * SocketMessage payload.
-     * @member {"init"|"ping"|"pong"|undefined} payload
-     * @memberof SocketMessage
+     * Envelope payload.
+     * @member {"ping"|"pong"|"pixel"|"error"|undefined} payload
+     * @memberof Envelope
      * @instance
      */
-    Object.defineProperty(SocketMessage.prototype, "payload", {
-        get: $util.oneOfGetter($oneOfFields = ["init", "ping", "pong"]),
+    Object.defineProperty(Envelope.prototype, "payload", {
+        get: $util.oneOfGetter($oneOfFields = ["ping", "pong", "pixel", "error"]),
         set: $util.oneOfSetter($oneOfFields)
     });
 
     /**
-     * Creates a new SocketMessage instance using the specified properties.
+     * Creates a new Envelope instance using the specified properties.
      * @function create
-     * @memberof SocketMessage
+     * @memberof Envelope
      * @static
-     * @param {ISocketMessage=} [properties] Properties to set
-     * @returns {SocketMessage} SocketMessage instance
+     * @param {IEnvelope=} [properties] Properties to set
+     * @returns {Envelope} Envelope instance
      */
-    SocketMessage.create = function create(properties) {
-        return new SocketMessage(properties);
+    Envelope.create = function create(properties) {
+        return new Envelope(properties);
     };
 
     /**
-     * Encodes the specified SocketMessage message. Does not implicitly {@link SocketMessage.verify|verify} messages.
+     * Encodes the specified Envelope message. Does not implicitly {@link Envelope.verify|verify} messages.
      * @function encode
-     * @memberof SocketMessage
+     * @memberof Envelope
      * @static
-     * @param {ISocketMessage} message SocketMessage message or plain object to encode
+     * @param {IEnvelope} message Envelope message or plain object to encode
      * @param {$protobuf.Writer} [writer] Writer to encode to
      * @returns {$protobuf.Writer} Writer
      */
-    SocketMessage.encode = function encode(message, writer) {
+    Envelope.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.init != null && Object.hasOwnProperty.call(message, "init"))
-            $root.Init.encode(message.init, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+            writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
+        if (message.timestamp != null && Object.hasOwnProperty.call(message, "timestamp"))
+            writer.uint32(/* id 2, wireType 0 =*/16).int64(message.timestamp);
+        if (message.correlationId != null && Object.hasOwnProperty.call(message, "correlationId"))
+            writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.correlationId);
         if (message.ping != null && Object.hasOwnProperty.call(message, "ping"))
-            $root.Ping.encode(message.ping, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            $root.Ping.encode(message.ping, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
         if (message.pong != null && Object.hasOwnProperty.call(message, "pong"))
-            $root.Pong.encode(message.pong, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            $root.Pong.encode(message.pong, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+        if (message.pixel != null && Object.hasOwnProperty.call(message, "pixel"))
+            $root.Pixel.encode(message.pixel, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+        if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+            $root.Error.encode(message.error, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
         return writer;
     };
 
     /**
-     * Encodes the specified SocketMessage message, length delimited. Does not implicitly {@link SocketMessage.verify|verify} messages.
+     * Encodes the specified Envelope message, length delimited. Does not implicitly {@link Envelope.verify|verify} messages.
      * @function encodeDelimited
-     * @memberof SocketMessage
+     * @memberof Envelope
      * @static
-     * @param {ISocketMessage} message SocketMessage message or plain object to encode
+     * @param {IEnvelope} message Envelope message or plain object to encode
      * @param {$protobuf.Writer} [writer] Writer to encode to
      * @returns {$protobuf.Writer} Writer
      */
-    SocketMessage.encodeDelimited = function encodeDelimited(message, writer) {
+    Envelope.encodeDelimited = function encodeDelimited(message, writer) {
         return this.encode(message, writer).ldelim();
     };
 
     /**
-     * Decodes a SocketMessage message from the specified reader or buffer.
+     * Decodes an Envelope message from the specified reader or buffer.
      * @function decode
-     * @memberof SocketMessage
+     * @memberof Envelope
      * @static
      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
      * @param {number} [length] Message length if known beforehand
-     * @returns {SocketMessage} SocketMessage
+     * @returns {Envelope} Envelope
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    SocketMessage.decode = function decode(reader, length, error) {
+    Envelope.decode = function decode(reader, length, error) {
         if (!(reader instanceof $Reader))
             reader = $Reader.create(reader);
-        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SocketMessage();
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Envelope();
         while (reader.pos < end) {
             var tag = reader.uint32();
             if (tag === error)
                 break;
             switch (tag >>> 3) {
             case 1: {
-                    message.init = $root.Init.decode(reader, reader.uint32());
+                    message.id = reader.uint32();
                     break;
                 }
             case 2: {
-                    message.ping = $root.Ping.decode(reader, reader.uint32());
+                    message.timestamp = reader.int64();
                     break;
                 }
             case 3: {
+                    message.correlationId = reader.uint32();
+                    break;
+                }
+            case 6: {
+                    message.ping = $root.Ping.decode(reader, reader.uint32());
+                    break;
+                }
+            case 7: {
                     message.pong = $root.Pong.decode(reader, reader.uint32());
+                    break;
+                }
+            case 8: {
+                    message.pixel = $root.Pixel.decode(reader, reader.uint32());
+                    break;
+                }
+            case 9: {
+                    message.error = $root.Error.decode(reader, reader.uint32());
                     break;
                 }
             default:
@@ -365,44 +220,43 @@ $root.SocketMessage = (function() {
     };
 
     /**
-     * Decodes a SocketMessage message from the specified reader or buffer, length delimited.
+     * Decodes an Envelope message from the specified reader or buffer, length delimited.
      * @function decodeDelimited
-     * @memberof SocketMessage
+     * @memberof Envelope
      * @static
      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-     * @returns {SocketMessage} SocketMessage
+     * @returns {Envelope} Envelope
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    SocketMessage.decodeDelimited = function decodeDelimited(reader) {
+    Envelope.decodeDelimited = function decodeDelimited(reader) {
         if (!(reader instanceof $Reader))
             reader = new $Reader(reader);
         return this.decode(reader, reader.uint32());
     };
 
     /**
-     * Verifies a SocketMessage message.
+     * Verifies an Envelope message.
      * @function verify
-     * @memberof SocketMessage
+     * @memberof Envelope
      * @static
      * @param {Object.<string,*>} message Plain object to verify
      * @returns {string|null} `null` if valid, otherwise the reason why it is not
      */
-    SocketMessage.verify = function verify(message) {
+    Envelope.verify = function verify(message) {
         if (typeof message !== "object" || message === null)
             return "object expected";
         var properties = {};
-        if (message.init != null && message.hasOwnProperty("init")) {
-            properties.payload = 1;
-            {
-                var error = $root.Init.verify(message.init);
-                if (error)
-                    return "init." + error;
-            }
-        }
+        if (message.id != null && message.hasOwnProperty("id"))
+            if (!$util.isInteger(message.id))
+                return "id: integer expected";
+        if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+            if (!$util.isInteger(message.timestamp) && !(message.timestamp && $util.isInteger(message.timestamp.low) && $util.isInteger(message.timestamp.high)))
+                return "timestamp: integer|Long expected";
+        if (message.correlationId != null && message.hasOwnProperty("correlationId"))
+            if (!$util.isInteger(message.correlationId))
+                return "correlationId: integer expected";
         if (message.ping != null && message.hasOwnProperty("ping")) {
-            if (properties.payload === 1)
-                return "payload: multiple values";
             properties.payload = 1;
             {
                 var error = $root.Ping.verify(message.ping);
@@ -420,57 +274,108 @@ $root.SocketMessage = (function() {
                     return "pong." + error;
             }
         }
+        if (message.pixel != null && message.hasOwnProperty("pixel")) {
+            if (properties.payload === 1)
+                return "payload: multiple values";
+            properties.payload = 1;
+            {
+                var error = $root.Pixel.verify(message.pixel);
+                if (error)
+                    return "pixel." + error;
+            }
+        }
+        if (message.error != null && message.hasOwnProperty("error")) {
+            if (properties.payload === 1)
+                return "payload: multiple values";
+            properties.payload = 1;
+            {
+                var error = $root.Error.verify(message.error);
+                if (error)
+                    return "error." + error;
+            }
+        }
         return null;
     };
 
     /**
-     * Creates a SocketMessage message from a plain object. Also converts values to their respective internal types.
+     * Creates an Envelope message from a plain object. Also converts values to their respective internal types.
      * @function fromObject
-     * @memberof SocketMessage
+     * @memberof Envelope
      * @static
      * @param {Object.<string,*>} object Plain object
-     * @returns {SocketMessage} SocketMessage
+     * @returns {Envelope} Envelope
      */
-    SocketMessage.fromObject = function fromObject(object) {
-        if (object instanceof $root.SocketMessage)
+    Envelope.fromObject = function fromObject(object) {
+        if (object instanceof $root.Envelope)
             return object;
-        var message = new $root.SocketMessage();
-        if (object.init != null) {
-            if (typeof object.init !== "object")
-                throw TypeError(".SocketMessage.init: object expected");
-            message.init = $root.Init.fromObject(object.init);
-        }
+        var message = new $root.Envelope();
+        if (object.id != null)
+            message.id = object.id >>> 0;
+        if (object.timestamp != null)
+            if ($util.Long)
+                (message.timestamp = $util.Long.fromValue(object.timestamp)).unsigned = false;
+            else if (typeof object.timestamp === "string")
+                message.timestamp = parseInt(object.timestamp, 10);
+            else if (typeof object.timestamp === "number")
+                message.timestamp = object.timestamp;
+            else if (typeof object.timestamp === "object")
+                message.timestamp = new $util.LongBits(object.timestamp.low >>> 0, object.timestamp.high >>> 0).toNumber();
+        if (object.correlationId != null)
+            message.correlationId = object.correlationId >>> 0;
         if (object.ping != null) {
             if (typeof object.ping !== "object")
-                throw TypeError(".SocketMessage.ping: object expected");
+                throw TypeError(".Envelope.ping: object expected");
             message.ping = $root.Ping.fromObject(object.ping);
         }
         if (object.pong != null) {
             if (typeof object.pong !== "object")
-                throw TypeError(".SocketMessage.pong: object expected");
+                throw TypeError(".Envelope.pong: object expected");
             message.pong = $root.Pong.fromObject(object.pong);
+        }
+        if (object.pixel != null) {
+            if (typeof object.pixel !== "object")
+                throw TypeError(".Envelope.pixel: object expected");
+            message.pixel = $root.Pixel.fromObject(object.pixel);
+        }
+        if (object.error != null) {
+            if (typeof object.error !== "object")
+                throw TypeError(".Envelope.error: object expected");
+            message.error = $root.Error.fromObject(object.error);
         }
         return message;
     };
 
     /**
-     * Creates a plain object from a SocketMessage message. Also converts values to other types if specified.
+     * Creates a plain object from an Envelope message. Also converts values to other types if specified.
      * @function toObject
-     * @memberof SocketMessage
+     * @memberof Envelope
      * @static
-     * @param {SocketMessage} message SocketMessage
+     * @param {Envelope} message Envelope
      * @param {$protobuf.IConversionOptions} [options] Conversion options
      * @returns {Object.<string,*>} Plain object
      */
-    SocketMessage.toObject = function toObject(message, options) {
+    Envelope.toObject = function toObject(message, options) {
         if (!options)
             options = {};
         var object = {};
-        if (message.init != null && message.hasOwnProperty("init")) {
-            object.init = $root.Init.toObject(message.init, options);
-            if (options.oneofs)
-                object.payload = "init";
+        if (options.defaults) {
+            object.id = 0;
+            if ($util.Long) {
+                var long = new $util.Long(0, 0, false);
+                object.timestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+            } else
+                object.timestamp = options.longs === String ? "0" : 0;
+            object.correlationId = 0;
         }
+        if (message.id != null && message.hasOwnProperty("id"))
+            object.id = message.id;
+        if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+            if (typeof message.timestamp === "number")
+                object.timestamp = options.longs === String ? String(message.timestamp) : message.timestamp;
+            else
+                object.timestamp = options.longs === String ? $util.Long.prototype.toString.call(message.timestamp) : options.longs === Number ? new $util.LongBits(message.timestamp.low >>> 0, message.timestamp.high >>> 0).toNumber() : message.timestamp;
+        if (message.correlationId != null && message.hasOwnProperty("correlationId"))
+            object.correlationId = message.correlationId;
         if (message.ping != null && message.hasOwnProperty("ping")) {
             object.ping = $root.Ping.toObject(message.ping, options);
             if (options.oneofs)
@@ -481,36 +386,46 @@ $root.SocketMessage = (function() {
             if (options.oneofs)
                 object.payload = "pong";
         }
+        if (message.pixel != null && message.hasOwnProperty("pixel")) {
+            object.pixel = $root.Pixel.toObject(message.pixel, options);
+            if (options.oneofs)
+                object.payload = "pixel";
+        }
+        if (message.error != null && message.hasOwnProperty("error")) {
+            object.error = $root.Error.toObject(message.error, options);
+            if (options.oneofs)
+                object.payload = "error";
+        }
         return object;
     };
 
     /**
-     * Converts this SocketMessage to JSON.
+     * Converts this Envelope to JSON.
      * @function toJSON
-     * @memberof SocketMessage
+     * @memberof Envelope
      * @instance
      * @returns {Object.<string,*>} JSON object
      */
-    SocketMessage.prototype.toJSON = function toJSON() {
+    Envelope.prototype.toJSON = function toJSON() {
         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
     /**
-     * Gets the default type url for SocketMessage
+     * Gets the default type url for Envelope
      * @function getTypeUrl
-     * @memberof SocketMessage
+     * @memberof Envelope
      * @static
      * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
      * @returns {string} The default type url
      */
-    SocketMessage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+    Envelope.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
         if (typeUrlPrefix === undefined) {
             typeUrlPrefix = "type.googleapis.com";
         }
-        return typeUrlPrefix + "/SocketMessage";
+        return typeUrlPrefix + "/Envelope";
     };
 
-    return SocketMessage;
+    return Envelope;
 })();
 
 $root.Ping = (function() {
@@ -519,7 +434,7 @@ $root.Ping = (function() {
      * Properties of a Ping.
      * @exports IPing
      * @interface IPing
-     * @property {number|Long|null} [timestamp] Ping timestamp
+     * @property {number|Long|null} [senderSendTime] Ping senderSendTime
      */
 
     /**
@@ -538,12 +453,12 @@ $root.Ping = (function() {
     }
 
     /**
-     * Ping timestamp.
-     * @member {number|Long} timestamp
+     * Ping senderSendTime.
+     * @member {number|Long} senderSendTime
      * @memberof Ping
      * @instance
      */
-    Ping.prototype.timestamp = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    Ping.prototype.senderSendTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
      * Creates a new Ping instance using the specified properties.
@@ -569,8 +484,8 @@ $root.Ping = (function() {
     Ping.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.timestamp != null && Object.hasOwnProperty.call(message, "timestamp"))
-            writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.timestamp);
+        if (message.senderSendTime != null && Object.hasOwnProperty.call(message, "senderSendTime"))
+            writer.uint32(/* id 1, wireType 0 =*/8).int64(message.senderSendTime);
         return writer;
     };
 
@@ -608,7 +523,7 @@ $root.Ping = (function() {
                 break;
             switch (tag >>> 3) {
             case 1: {
-                    message.timestamp = reader.uint64();
+                    message.senderSendTime = reader.int64();
                     break;
                 }
             default:
@@ -646,9 +561,9 @@ $root.Ping = (function() {
     Ping.verify = function verify(message) {
         if (typeof message !== "object" || message === null)
             return "object expected";
-        if (message.timestamp != null && message.hasOwnProperty("timestamp"))
-            if (!$util.isInteger(message.timestamp) && !(message.timestamp && $util.isInteger(message.timestamp.low) && $util.isInteger(message.timestamp.high)))
-                return "timestamp: integer|Long expected";
+        if (message.senderSendTime != null && message.hasOwnProperty("senderSendTime"))
+            if (!$util.isInteger(message.senderSendTime) && !(message.senderSendTime && $util.isInteger(message.senderSendTime.low) && $util.isInteger(message.senderSendTime.high)))
+                return "senderSendTime: integer|Long expected";
         return null;
     };
 
@@ -664,15 +579,15 @@ $root.Ping = (function() {
         if (object instanceof $root.Ping)
             return object;
         var message = new $root.Ping();
-        if (object.timestamp != null)
+        if (object.senderSendTime != null)
             if ($util.Long)
-                (message.timestamp = $util.Long.fromValue(object.timestamp)).unsigned = true;
-            else if (typeof object.timestamp === "string")
-                message.timestamp = parseInt(object.timestamp, 10);
-            else if (typeof object.timestamp === "number")
-                message.timestamp = object.timestamp;
-            else if (typeof object.timestamp === "object")
-                message.timestamp = new $util.LongBits(object.timestamp.low >>> 0, object.timestamp.high >>> 0).toNumber(true);
+                (message.senderSendTime = $util.Long.fromValue(object.senderSendTime)).unsigned = false;
+            else if (typeof object.senderSendTime === "string")
+                message.senderSendTime = parseInt(object.senderSendTime, 10);
+            else if (typeof object.senderSendTime === "number")
+                message.senderSendTime = object.senderSendTime;
+            else if (typeof object.senderSendTime === "object")
+                message.senderSendTime = new $util.LongBits(object.senderSendTime.low >>> 0, object.senderSendTime.high >>> 0).toNumber();
         return message;
     };
 
@@ -691,15 +606,15 @@ $root.Ping = (function() {
         var object = {};
         if (options.defaults)
             if ($util.Long) {
-                var long = new $util.Long(0, 0, true);
-                object.timestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                var long = new $util.Long(0, 0, false);
+                object.senderSendTime = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
             } else
-                object.timestamp = options.longs === String ? "0" : 0;
-        if (message.timestamp != null && message.hasOwnProperty("timestamp"))
-            if (typeof message.timestamp === "number")
-                object.timestamp = options.longs === String ? String(message.timestamp) : message.timestamp;
+                object.senderSendTime = options.longs === String ? "0" : 0;
+        if (message.senderSendTime != null && message.hasOwnProperty("senderSendTime"))
+            if (typeof message.senderSendTime === "number")
+                object.senderSendTime = options.longs === String ? String(message.senderSendTime) : message.senderSendTime;
             else
-                object.timestamp = options.longs === String ? $util.Long.prototype.toString.call(message.timestamp) : options.longs === Number ? new $util.LongBits(message.timestamp.low >>> 0, message.timestamp.high >>> 0).toNumber(true) : message.timestamp;
+                object.senderSendTime = options.longs === String ? $util.Long.prototype.toString.call(message.senderSendTime) : options.longs === Number ? new $util.LongBits(message.senderSendTime.low >>> 0, message.senderSendTime.high >>> 0).toNumber() : message.senderSendTime;
         return object;
     };
 
@@ -738,7 +653,9 @@ $root.Pong = (function() {
      * Properties of a Pong.
      * @exports IPong
      * @interface IPong
-     * @property {number|Long|null} [timestamp] Pong timestamp
+     * @property {number|Long|null} [senderSendTime] Pong senderSendTime
+     * @property {number|Long|null} [recieverReceiveTime] Pong recieverReceiveTime
+     * @property {number|Long|null} [recieverSendTime] Pong recieverSendTime
      */
 
     /**
@@ -757,12 +674,28 @@ $root.Pong = (function() {
     }
 
     /**
-     * Pong timestamp.
-     * @member {number|Long} timestamp
+     * Pong senderSendTime.
+     * @member {number|Long} senderSendTime
      * @memberof Pong
      * @instance
      */
-    Pong.prototype.timestamp = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    Pong.prototype.senderSendTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Pong recieverReceiveTime.
+     * @member {number|Long} recieverReceiveTime
+     * @memberof Pong
+     * @instance
+     */
+    Pong.prototype.recieverReceiveTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Pong recieverSendTime.
+     * @member {number|Long} recieverSendTime
+     * @memberof Pong
+     * @instance
+     */
+    Pong.prototype.recieverSendTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
      * Creates a new Pong instance using the specified properties.
@@ -788,8 +721,12 @@ $root.Pong = (function() {
     Pong.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.timestamp != null && Object.hasOwnProperty.call(message, "timestamp"))
-            writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.timestamp);
+        if (message.senderSendTime != null && Object.hasOwnProperty.call(message, "senderSendTime"))
+            writer.uint32(/* id 1, wireType 0 =*/8).int64(message.senderSendTime);
+        if (message.recieverReceiveTime != null && Object.hasOwnProperty.call(message, "recieverReceiveTime"))
+            writer.uint32(/* id 2, wireType 0 =*/16).int64(message.recieverReceiveTime);
+        if (message.recieverSendTime != null && Object.hasOwnProperty.call(message, "recieverSendTime"))
+            writer.uint32(/* id 3, wireType 0 =*/24).int64(message.recieverSendTime);
         return writer;
     };
 
@@ -827,7 +764,15 @@ $root.Pong = (function() {
                 break;
             switch (tag >>> 3) {
             case 1: {
-                    message.timestamp = reader.uint64();
+                    message.senderSendTime = reader.int64();
+                    break;
+                }
+            case 2: {
+                    message.recieverReceiveTime = reader.int64();
+                    break;
+                }
+            case 3: {
+                    message.recieverSendTime = reader.int64();
                     break;
                 }
             default:
@@ -865,9 +810,15 @@ $root.Pong = (function() {
     Pong.verify = function verify(message) {
         if (typeof message !== "object" || message === null)
             return "object expected";
-        if (message.timestamp != null && message.hasOwnProperty("timestamp"))
-            if (!$util.isInteger(message.timestamp) && !(message.timestamp && $util.isInteger(message.timestamp.low) && $util.isInteger(message.timestamp.high)))
-                return "timestamp: integer|Long expected";
+        if (message.senderSendTime != null && message.hasOwnProperty("senderSendTime"))
+            if (!$util.isInteger(message.senderSendTime) && !(message.senderSendTime && $util.isInteger(message.senderSendTime.low) && $util.isInteger(message.senderSendTime.high)))
+                return "senderSendTime: integer|Long expected";
+        if (message.recieverReceiveTime != null && message.hasOwnProperty("recieverReceiveTime"))
+            if (!$util.isInteger(message.recieverReceiveTime) && !(message.recieverReceiveTime && $util.isInteger(message.recieverReceiveTime.low) && $util.isInteger(message.recieverReceiveTime.high)))
+                return "recieverReceiveTime: integer|Long expected";
+        if (message.recieverSendTime != null && message.hasOwnProperty("recieverSendTime"))
+            if (!$util.isInteger(message.recieverSendTime) && !(message.recieverSendTime && $util.isInteger(message.recieverSendTime.low) && $util.isInteger(message.recieverSendTime.high)))
+                return "recieverSendTime: integer|Long expected";
         return null;
     };
 
@@ -883,15 +834,33 @@ $root.Pong = (function() {
         if (object instanceof $root.Pong)
             return object;
         var message = new $root.Pong();
-        if (object.timestamp != null)
+        if (object.senderSendTime != null)
             if ($util.Long)
-                (message.timestamp = $util.Long.fromValue(object.timestamp)).unsigned = true;
-            else if (typeof object.timestamp === "string")
-                message.timestamp = parseInt(object.timestamp, 10);
-            else if (typeof object.timestamp === "number")
-                message.timestamp = object.timestamp;
-            else if (typeof object.timestamp === "object")
-                message.timestamp = new $util.LongBits(object.timestamp.low >>> 0, object.timestamp.high >>> 0).toNumber(true);
+                (message.senderSendTime = $util.Long.fromValue(object.senderSendTime)).unsigned = false;
+            else if (typeof object.senderSendTime === "string")
+                message.senderSendTime = parseInt(object.senderSendTime, 10);
+            else if (typeof object.senderSendTime === "number")
+                message.senderSendTime = object.senderSendTime;
+            else if (typeof object.senderSendTime === "object")
+                message.senderSendTime = new $util.LongBits(object.senderSendTime.low >>> 0, object.senderSendTime.high >>> 0).toNumber();
+        if (object.recieverReceiveTime != null)
+            if ($util.Long)
+                (message.recieverReceiveTime = $util.Long.fromValue(object.recieverReceiveTime)).unsigned = false;
+            else if (typeof object.recieverReceiveTime === "string")
+                message.recieverReceiveTime = parseInt(object.recieverReceiveTime, 10);
+            else if (typeof object.recieverReceiveTime === "number")
+                message.recieverReceiveTime = object.recieverReceiveTime;
+            else if (typeof object.recieverReceiveTime === "object")
+                message.recieverReceiveTime = new $util.LongBits(object.recieverReceiveTime.low >>> 0, object.recieverReceiveTime.high >>> 0).toNumber();
+        if (object.recieverSendTime != null)
+            if ($util.Long)
+                (message.recieverSendTime = $util.Long.fromValue(object.recieverSendTime)).unsigned = false;
+            else if (typeof object.recieverSendTime === "string")
+                message.recieverSendTime = parseInt(object.recieverSendTime, 10);
+            else if (typeof object.recieverSendTime === "number")
+                message.recieverSendTime = object.recieverSendTime;
+            else if (typeof object.recieverSendTime === "object")
+                message.recieverSendTime = new $util.LongBits(object.recieverSendTime.low >>> 0, object.recieverSendTime.high >>> 0).toNumber();
         return message;
     };
 
@@ -908,17 +877,38 @@ $root.Pong = (function() {
         if (!options)
             options = {};
         var object = {};
-        if (options.defaults)
+        if (options.defaults) {
             if ($util.Long) {
-                var long = new $util.Long(0, 0, true);
-                object.timestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                var long = new $util.Long(0, 0, false);
+                object.senderSendTime = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
             } else
-                object.timestamp = options.longs === String ? "0" : 0;
-        if (message.timestamp != null && message.hasOwnProperty("timestamp"))
-            if (typeof message.timestamp === "number")
-                object.timestamp = options.longs === String ? String(message.timestamp) : message.timestamp;
+                object.senderSendTime = options.longs === String ? "0" : 0;
+            if ($util.Long) {
+                var long = new $util.Long(0, 0, false);
+                object.recieverReceiveTime = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+            } else
+                object.recieverReceiveTime = options.longs === String ? "0" : 0;
+            if ($util.Long) {
+                var long = new $util.Long(0, 0, false);
+                object.recieverSendTime = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+            } else
+                object.recieverSendTime = options.longs === String ? "0" : 0;
+        }
+        if (message.senderSendTime != null && message.hasOwnProperty("senderSendTime"))
+            if (typeof message.senderSendTime === "number")
+                object.senderSendTime = options.longs === String ? String(message.senderSendTime) : message.senderSendTime;
             else
-                object.timestamp = options.longs === String ? $util.Long.prototype.toString.call(message.timestamp) : options.longs === Number ? new $util.LongBits(message.timestamp.low >>> 0, message.timestamp.high >>> 0).toNumber(true) : message.timestamp;
+                object.senderSendTime = options.longs === String ? $util.Long.prototype.toString.call(message.senderSendTime) : options.longs === Number ? new $util.LongBits(message.senderSendTime.low >>> 0, message.senderSendTime.high >>> 0).toNumber() : message.senderSendTime;
+        if (message.recieverReceiveTime != null && message.hasOwnProperty("recieverReceiveTime"))
+            if (typeof message.recieverReceiveTime === "number")
+                object.recieverReceiveTime = options.longs === String ? String(message.recieverReceiveTime) : message.recieverReceiveTime;
+            else
+                object.recieverReceiveTime = options.longs === String ? $util.Long.prototype.toString.call(message.recieverReceiveTime) : options.longs === Number ? new $util.LongBits(message.recieverReceiveTime.low >>> 0, message.recieverReceiveTime.high >>> 0).toNumber() : message.recieverReceiveTime;
+        if (message.recieverSendTime != null && message.hasOwnProperty("recieverSendTime"))
+            if (typeof message.recieverSendTime === "number")
+                object.recieverSendTime = options.longs === String ? String(message.recieverSendTime) : message.recieverSendTime;
+            else
+                object.recieverSendTime = options.longs === String ? $util.Long.prototype.toString.call(message.recieverSendTime) : options.longs === Number ? new $util.LongBits(message.recieverSendTime.low >>> 0, message.recieverSendTime.high >>> 0).toNumber() : message.recieverSendTime;
         return object;
     };
 
@@ -949,6 +939,761 @@ $root.Pong = (function() {
     };
 
     return Pong;
+})();
+
+$root.Pixel = (function() {
+
+    /**
+     * Properties of a Pixel.
+     * @exports IPixel
+     * @interface IPixel
+     * @property {number|null} [id] Pixel id
+     * @property {number|null} [color] Pixel color
+     */
+
+    /**
+     * Constructs a new Pixel.
+     * @exports Pixel
+     * @classdesc Represents a Pixel.
+     * @implements IPixel
+     * @constructor
+     * @param {IPixel=} [properties] Properties to set
+     */
+    function Pixel(properties) {
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * Pixel id.
+     * @member {number} id
+     * @memberof Pixel
+     * @instance
+     */
+    Pixel.prototype.id = 0;
+
+    /**
+     * Pixel color.
+     * @member {number} color
+     * @memberof Pixel
+     * @instance
+     */
+    Pixel.prototype.color = 0;
+
+    /**
+     * Creates a new Pixel instance using the specified properties.
+     * @function create
+     * @memberof Pixel
+     * @static
+     * @param {IPixel=} [properties] Properties to set
+     * @returns {Pixel} Pixel instance
+     */
+    Pixel.create = function create(properties) {
+        return new Pixel(properties);
+    };
+
+    /**
+     * Encodes the specified Pixel message. Does not implicitly {@link Pixel.verify|verify} messages.
+     * @function encode
+     * @memberof Pixel
+     * @static
+     * @param {IPixel} message Pixel message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    Pixel.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.id);
+        if (message.color != null && Object.hasOwnProperty.call(message, "color"))
+            writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.color);
+        return writer;
+    };
+
+    /**
+     * Encodes the specified Pixel message, length delimited. Does not implicitly {@link Pixel.verify|verify} messages.
+     * @function encodeDelimited
+     * @memberof Pixel
+     * @static
+     * @param {IPixel} message Pixel message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    Pixel.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes a Pixel message from the specified reader or buffer.
+     * @function decode
+     * @memberof Pixel
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {Pixel} Pixel
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    Pixel.decode = function decode(reader, length, error) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Pixel();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            if (tag === error)
+                break;
+            switch (tag >>> 3) {
+            case 1: {
+                    message.id = reader.int32();
+                    break;
+                }
+            case 3: {
+                    message.color = reader.uint32();
+                    break;
+                }
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes a Pixel message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof Pixel
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {Pixel} Pixel
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    Pixel.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies a Pixel message.
+     * @function verify
+     * @memberof Pixel
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    Pixel.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        if (message.id != null && message.hasOwnProperty("id"))
+            if (!$util.isInteger(message.id))
+                return "id: integer expected";
+        if (message.color != null && message.hasOwnProperty("color"))
+            if (!$util.isInteger(message.color))
+                return "color: integer expected";
+        return null;
+    };
+
+    /**
+     * Creates a Pixel message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof Pixel
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {Pixel} Pixel
+     */
+    Pixel.fromObject = function fromObject(object) {
+        if (object instanceof $root.Pixel)
+            return object;
+        var message = new $root.Pixel();
+        if (object.id != null)
+            message.id = object.id | 0;
+        if (object.color != null)
+            message.color = object.color >>> 0;
+        return message;
+    };
+
+    /**
+     * Creates a plain object from a Pixel message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof Pixel
+     * @static
+     * @param {Pixel} message Pixel
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    Pixel.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.defaults) {
+            object.id = 0;
+            object.color = 0;
+        }
+        if (message.id != null && message.hasOwnProperty("id"))
+            object.id = message.id;
+        if (message.color != null && message.hasOwnProperty("color"))
+            object.color = message.color;
+        return object;
+    };
+
+    /**
+     * Converts this Pixel to JSON.
+     * @function toJSON
+     * @memberof Pixel
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    Pixel.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    /**
+     * Gets the default type url for Pixel
+     * @function getTypeUrl
+     * @memberof Pixel
+     * @static
+     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+     * @returns {string} The default type url
+     */
+    Pixel.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        if (typeUrlPrefix === undefined) {
+            typeUrlPrefix = "type.googleapis.com";
+        }
+        return typeUrlPrefix + "/Pixel";
+    };
+
+    return Pixel;
+})();
+
+/**
+ * ErrorCode enum.
+ * @exports ErrorCode
+ * @enum {number}
+ * @property {number} UNKNOWN=0 UNKNOWN value
+ * @property {number} PIXEL_NOT_FOUND=100 PIXEL_NOT_FOUND value
+ * @property {number} PIXEL_OUT_OF_BOUNDS=101 PIXEL_OUT_OF_BOUNDS value
+ * @property {number} USER_NOT_FOUND=200 USER_NOT_FOUND value
+ * @property {number} USER_COOLDOWN=201 USER_COOLDOWN value
+ */
+$root.ErrorCode = (function() {
+    var valuesById = {}, values = Object.create(valuesById);
+    values[valuesById[0] = "UNKNOWN"] = 0;
+    values[valuesById[100] = "PIXEL_NOT_FOUND"] = 100;
+    values[valuesById[101] = "PIXEL_OUT_OF_BOUNDS"] = 101;
+    values[valuesById[200] = "USER_NOT_FOUND"] = 200;
+    values[valuesById[201] = "USER_COOLDOWN"] = 201;
+    return values;
+})();
+
+$root.Error = (function() {
+
+    /**
+     * Properties of an Error.
+     * @exports IError
+     * @interface IError
+     * @property {ErrorCode|null} [code] Error code
+     * @property {ICooldownData|null} [cooldown] Error cooldown
+     */
+
+    /**
+     * Constructs a new Error.
+     * @exports Error
+     * @classdesc Represents an Error.
+     * @implements IError
+     * @constructor
+     * @param {IError=} [properties] Properties to set
+     */
+    function Error(properties) {
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * Error code.
+     * @member {ErrorCode} code
+     * @memberof Error
+     * @instance
+     */
+    Error.prototype.code = 0;
+
+    /**
+     * Error cooldown.
+     * @member {ICooldownData|null|undefined} cooldown
+     * @memberof Error
+     * @instance
+     */
+    Error.prototype.cooldown = null;
+
+    // OneOf field names bound to virtual getters and setters
+    var $oneOfFields;
+
+    /**
+     * Error data.
+     * @member {"cooldown"|undefined} data
+     * @memberof Error
+     * @instance
+     */
+    Object.defineProperty(Error.prototype, "data", {
+        get: $util.oneOfGetter($oneOfFields = ["cooldown"]),
+        set: $util.oneOfSetter($oneOfFields)
+    });
+
+    /**
+     * Creates a new Error instance using the specified properties.
+     * @function create
+     * @memberof Error
+     * @static
+     * @param {IError=} [properties] Properties to set
+     * @returns {Error} Error instance
+     */
+    Error.create = function create(properties) {
+        return new Error(properties);
+    };
+
+    /**
+     * Encodes the specified Error message. Does not implicitly {@link Error.verify|verify} messages.
+     * @function encode
+     * @memberof Error
+     * @static
+     * @param {IError} message Error message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    Error.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
+        if (message.cooldown != null && Object.hasOwnProperty.call(message, "cooldown"))
+            $root.CooldownData.encode(message.cooldown, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+        return writer;
+    };
+
+    /**
+     * Encodes the specified Error message, length delimited. Does not implicitly {@link Error.verify|verify} messages.
+     * @function encodeDelimited
+     * @memberof Error
+     * @static
+     * @param {IError} message Error message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    Error.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes an Error message from the specified reader or buffer.
+     * @function decode
+     * @memberof Error
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {Error} Error
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    Error.decode = function decode(reader, length, error) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Error();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            if (tag === error)
+                break;
+            switch (tag >>> 3) {
+            case 1: {
+                    message.code = reader.int32();
+                    break;
+                }
+            case 2: {
+                    message.cooldown = $root.CooldownData.decode(reader, reader.uint32());
+                    break;
+                }
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes an Error message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof Error
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {Error} Error
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    Error.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies an Error message.
+     * @function verify
+     * @memberof Error
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    Error.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        var properties = {};
+        if (message.code != null && message.hasOwnProperty("code"))
+            switch (message.code) {
+            default:
+                return "code: enum value expected";
+            case 0:
+            case 100:
+            case 101:
+            case 200:
+            case 201:
+                break;
+            }
+        if (message.cooldown != null && message.hasOwnProperty("cooldown")) {
+            properties.data = 1;
+            {
+                var error = $root.CooldownData.verify(message.cooldown);
+                if (error)
+                    return "cooldown." + error;
+            }
+        }
+        return null;
+    };
+
+    /**
+     * Creates an Error message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof Error
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {Error} Error
+     */
+    Error.fromObject = function fromObject(object) {
+        if (object instanceof $root.Error)
+            return object;
+        var message = new $root.Error();
+        switch (object.code) {
+        default:
+            if (typeof object.code === "number") {
+                message.code = object.code;
+                break;
+            }
+            break;
+        case "UNKNOWN":
+        case 0:
+            message.code = 0;
+            break;
+        case "PIXEL_NOT_FOUND":
+        case 100:
+            message.code = 100;
+            break;
+        case "PIXEL_OUT_OF_BOUNDS":
+        case 101:
+            message.code = 101;
+            break;
+        case "USER_NOT_FOUND":
+        case 200:
+            message.code = 200;
+            break;
+        case "USER_COOLDOWN":
+        case 201:
+            message.code = 201;
+            break;
+        }
+        if (object.cooldown != null) {
+            if (typeof object.cooldown !== "object")
+                throw TypeError(".Error.cooldown: object expected");
+            message.cooldown = $root.CooldownData.fromObject(object.cooldown);
+        }
+        return message;
+    };
+
+    /**
+     * Creates a plain object from an Error message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof Error
+     * @static
+     * @param {Error} message Error
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    Error.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.defaults)
+            object.code = options.enums === String ? "UNKNOWN" : 0;
+        if (message.code != null && message.hasOwnProperty("code"))
+            object.code = options.enums === String ? $root.ErrorCode[message.code] === undefined ? message.code : $root.ErrorCode[message.code] : message.code;
+        if (message.cooldown != null && message.hasOwnProperty("cooldown")) {
+            object.cooldown = $root.CooldownData.toObject(message.cooldown, options);
+            if (options.oneofs)
+                object.data = "cooldown";
+        }
+        return object;
+    };
+
+    /**
+     * Converts this Error to JSON.
+     * @function toJSON
+     * @memberof Error
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    Error.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    /**
+     * Gets the default type url for Error
+     * @function getTypeUrl
+     * @memberof Error
+     * @static
+     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+     * @returns {string} The default type url
+     */
+    Error.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        if (typeUrlPrefix === undefined) {
+            typeUrlPrefix = "type.googleapis.com";
+        }
+        return typeUrlPrefix + "/Error";
+    };
+
+    return Error;
+})();
+
+$root.CooldownData = (function() {
+
+    /**
+     * Properties of a CooldownData.
+     * @exports ICooldownData
+     * @interface ICooldownData
+     * @property {number|Long|null} [until] CooldownData until
+     */
+
+    /**
+     * Constructs a new CooldownData.
+     * @exports CooldownData
+     * @classdesc Represents a CooldownData.
+     * @implements ICooldownData
+     * @constructor
+     * @param {ICooldownData=} [properties] Properties to set
+     */
+    function CooldownData(properties) {
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * CooldownData until.
+     * @member {number|Long} until
+     * @memberof CooldownData
+     * @instance
+     */
+    CooldownData.prototype.until = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Creates a new CooldownData instance using the specified properties.
+     * @function create
+     * @memberof CooldownData
+     * @static
+     * @param {ICooldownData=} [properties] Properties to set
+     * @returns {CooldownData} CooldownData instance
+     */
+    CooldownData.create = function create(properties) {
+        return new CooldownData(properties);
+    };
+
+    /**
+     * Encodes the specified CooldownData message. Does not implicitly {@link CooldownData.verify|verify} messages.
+     * @function encode
+     * @memberof CooldownData
+     * @static
+     * @param {ICooldownData} message CooldownData message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    CooldownData.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        if (message.until != null && Object.hasOwnProperty.call(message, "until"))
+            writer.uint32(/* id 1, wireType 0 =*/8).int64(message.until);
+        return writer;
+    };
+
+    /**
+     * Encodes the specified CooldownData message, length delimited. Does not implicitly {@link CooldownData.verify|verify} messages.
+     * @function encodeDelimited
+     * @memberof CooldownData
+     * @static
+     * @param {ICooldownData} message CooldownData message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    CooldownData.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes a CooldownData message from the specified reader or buffer.
+     * @function decode
+     * @memberof CooldownData
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {CooldownData} CooldownData
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    CooldownData.decode = function decode(reader, length, error) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CooldownData();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            if (tag === error)
+                break;
+            switch (tag >>> 3) {
+            case 1: {
+                    message.until = reader.int64();
+                    break;
+                }
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes a CooldownData message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof CooldownData
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {CooldownData} CooldownData
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    CooldownData.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies a CooldownData message.
+     * @function verify
+     * @memberof CooldownData
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    CooldownData.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        if (message.until != null && message.hasOwnProperty("until"))
+            if (!$util.isInteger(message.until) && !(message.until && $util.isInteger(message.until.low) && $util.isInteger(message.until.high)))
+                return "until: integer|Long expected";
+        return null;
+    };
+
+    /**
+     * Creates a CooldownData message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof CooldownData
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {CooldownData} CooldownData
+     */
+    CooldownData.fromObject = function fromObject(object) {
+        if (object instanceof $root.CooldownData)
+            return object;
+        var message = new $root.CooldownData();
+        if (object.until != null)
+            if ($util.Long)
+                (message.until = $util.Long.fromValue(object.until)).unsigned = false;
+            else if (typeof object.until === "string")
+                message.until = parseInt(object.until, 10);
+            else if (typeof object.until === "number")
+                message.until = object.until;
+            else if (typeof object.until === "object")
+                message.until = new $util.LongBits(object.until.low >>> 0, object.until.high >>> 0).toNumber();
+        return message;
+    };
+
+    /**
+     * Creates a plain object from a CooldownData message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof CooldownData
+     * @static
+     * @param {CooldownData} message CooldownData
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    CooldownData.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.defaults)
+            if ($util.Long) {
+                var long = new $util.Long(0, 0, false);
+                object.until = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+            } else
+                object.until = options.longs === String ? "0" : 0;
+        if (message.until != null && message.hasOwnProperty("until"))
+            if (typeof message.until === "number")
+                object.until = options.longs === String ? String(message.until) : message.until;
+            else
+                object.until = options.longs === String ? $util.Long.prototype.toString.call(message.until) : options.longs === Number ? new $util.LongBits(message.until.low >>> 0, message.until.high >>> 0).toNumber() : message.until;
+        return object;
+    };
+
+    /**
+     * Converts this CooldownData to JSON.
+     * @function toJSON
+     * @memberof CooldownData
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    CooldownData.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    /**
+     * Gets the default type url for CooldownData
+     * @function getTypeUrl
+     * @memberof CooldownData
+     * @static
+     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+     * @returns {string} The default type url
+     */
+    CooldownData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        if (typeUrlPrefix === undefined) {
+            typeUrlPrefix = "type.googleapis.com";
+        }
+        return typeUrlPrefix + "/CooldownData";
+    };
+
+    return CooldownData;
 })();
 
 module.exports = $root;

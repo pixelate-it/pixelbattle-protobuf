@@ -1,208 +1,135 @@
 import * as $protobuf from "protobufjs";
 import Long = require("long");
-/** Properties of an Init. */
-export interface IInit {
+/** Properties of an Envelope. */
+export interface IEnvelope {
 
-    /** Init id */
-    id?: (string|null);
-}
+    /** Envelope id */
+    id?: (number|null);
 
-/** Represents an Init. */
-export class Init implements IInit {
+    /** Envelope timestamp */
+    timestamp?: (number|Long|null);
 
-    /**
-     * Constructs a new Init.
-     * @param [properties] Properties to set
-     */
-    constructor(properties?: IInit);
+    /** Envelope correlationId */
+    correlationId?: (number|null);
 
-    /** Init id. */
-    public id: string;
-
-    /**
-     * Creates a new Init instance using the specified properties.
-     * @param [properties] Properties to set
-     * @returns Init instance
-     */
-    public static create(properties?: IInit): Init;
-
-    /**
-     * Encodes the specified Init message. Does not implicitly {@link Init.verify|verify} messages.
-     * @param message Init message or plain object to encode
-     * @param [writer] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(message: IInit, writer?: $protobuf.Writer): $protobuf.Writer;
-
-    /**
-     * Encodes the specified Init message, length delimited. Does not implicitly {@link Init.verify|verify} messages.
-     * @param message Init message or plain object to encode
-     * @param [writer] Writer to encode to
-     * @returns Writer
-     */
-    public static encodeDelimited(message: IInit, writer?: $protobuf.Writer): $protobuf.Writer;
-
-    /**
-     * Decodes an Init message from the specified reader or buffer.
-     * @param reader Reader or buffer to decode from
-     * @param [length] Message length if known beforehand
-     * @returns Init
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Init;
-
-    /**
-     * Decodes an Init message from the specified reader or buffer, length delimited.
-     * @param reader Reader or buffer to decode from
-     * @returns Init
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Init;
-
-    /**
-     * Verifies an Init message.
-     * @param message Plain object to verify
-     * @returns `null` if valid, otherwise the reason why it is not
-     */
-    public static verify(message: { [k: string]: any }): (string|null);
-
-    /**
-     * Creates an Init message from a plain object. Also converts values to their respective internal types.
-     * @param object Plain object
-     * @returns Init
-     */
-    public static fromObject(object: { [k: string]: any }): Init;
-
-    /**
-     * Creates a plain object from an Init message. Also converts values to other types if specified.
-     * @param message Init
-     * @param [options] Conversion options
-     * @returns Plain object
-     */
-    public static toObject(message: Init, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-    /**
-     * Converts this Init to JSON.
-     * @returns JSON object
-     */
-    public toJSON(): { [k: string]: any };
-
-    /**
-     * Gets the default type url for Init
-     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-     * @returns The default type url
-     */
-    public static getTypeUrl(typeUrlPrefix?: string): string;
-}
-
-/** Properties of a SocketMessage. */
-export interface ISocketMessage {
-
-    /** SocketMessage init */
-    init?: (IInit|null);
-
-    /** SocketMessage ping */
+    /** Envelope ping */
     ping?: (IPing|null);
 
-    /** SocketMessage pong */
+    /** Envelope pong */
     pong?: (IPong|null);
+
+    /** Envelope pixel */
+    pixel?: (IPixel|null);
+
+    /** Envelope error */
+    error?: (IError|null);
 }
 
-/** Represents a SocketMessage. */
-export class SocketMessage implements ISocketMessage {
+/** Represents an Envelope. */
+export class Envelope implements IEnvelope {
 
     /**
-     * Constructs a new SocketMessage.
+     * Constructs a new Envelope.
      * @param [properties] Properties to set
      */
-    constructor(properties?: ISocketMessage);
+    constructor(properties?: IEnvelope);
 
-    /** SocketMessage init. */
-    public init?: (IInit|null);
+    /** Envelope id. */
+    public id: number;
 
-    /** SocketMessage ping. */
+    /** Envelope timestamp. */
+    public timestamp: (number|Long);
+
+    /** Envelope correlationId. */
+    public correlationId: number;
+
+    /** Envelope ping. */
     public ping?: (IPing|null);
 
-    /** SocketMessage pong. */
+    /** Envelope pong. */
     public pong?: (IPong|null);
 
-    /** SocketMessage payload. */
-    public payload?: ("init"|"ping"|"pong");
+    /** Envelope pixel. */
+    public pixel?: (IPixel|null);
+
+    /** Envelope error. */
+    public error?: (IError|null);
+
+    /** Envelope payload. */
+    public payload?: ("ping"|"pong"|"pixel"|"error");
 
     /**
-     * Creates a new SocketMessage instance using the specified properties.
+     * Creates a new Envelope instance using the specified properties.
      * @param [properties] Properties to set
-     * @returns SocketMessage instance
+     * @returns Envelope instance
      */
-    public static create(properties?: ISocketMessage): SocketMessage;
+    public static create(properties?: IEnvelope): Envelope;
 
     /**
-     * Encodes the specified SocketMessage message. Does not implicitly {@link SocketMessage.verify|verify} messages.
-     * @param message SocketMessage message or plain object to encode
+     * Encodes the specified Envelope message. Does not implicitly {@link Envelope.verify|verify} messages.
+     * @param message Envelope message or plain object to encode
      * @param [writer] Writer to encode to
      * @returns Writer
      */
-    public static encode(message: ISocketMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+    public static encode(message: IEnvelope, writer?: $protobuf.Writer): $protobuf.Writer;
 
     /**
-     * Encodes the specified SocketMessage message, length delimited. Does not implicitly {@link SocketMessage.verify|verify} messages.
-     * @param message SocketMessage message or plain object to encode
+     * Encodes the specified Envelope message, length delimited. Does not implicitly {@link Envelope.verify|verify} messages.
+     * @param message Envelope message or plain object to encode
      * @param [writer] Writer to encode to
      * @returns Writer
      */
-    public static encodeDelimited(message: ISocketMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+    public static encodeDelimited(message: IEnvelope, writer?: $protobuf.Writer): $protobuf.Writer;
 
     /**
-     * Decodes a SocketMessage message from the specified reader or buffer.
+     * Decodes an Envelope message from the specified reader or buffer.
      * @param reader Reader or buffer to decode from
      * @param [length] Message length if known beforehand
-     * @returns SocketMessage
+     * @returns Envelope
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SocketMessage;
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Envelope;
 
     /**
-     * Decodes a SocketMessage message from the specified reader or buffer, length delimited.
+     * Decodes an Envelope message from the specified reader or buffer, length delimited.
      * @param reader Reader or buffer to decode from
-     * @returns SocketMessage
+     * @returns Envelope
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SocketMessage;
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Envelope;
 
     /**
-     * Verifies a SocketMessage message.
+     * Verifies an Envelope message.
      * @param message Plain object to verify
      * @returns `null` if valid, otherwise the reason why it is not
      */
     public static verify(message: { [k: string]: any }): (string|null);
 
     /**
-     * Creates a SocketMessage message from a plain object. Also converts values to their respective internal types.
+     * Creates an Envelope message from a plain object. Also converts values to their respective internal types.
      * @param object Plain object
-     * @returns SocketMessage
+     * @returns Envelope
      */
-    public static fromObject(object: { [k: string]: any }): SocketMessage;
+    public static fromObject(object: { [k: string]: any }): Envelope;
 
     /**
-     * Creates a plain object from a SocketMessage message. Also converts values to other types if specified.
-     * @param message SocketMessage
+     * Creates a plain object from an Envelope message. Also converts values to other types if specified.
+     * @param message Envelope
      * @param [options] Conversion options
      * @returns Plain object
      */
-    public static toObject(message: SocketMessage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+    public static toObject(message: Envelope, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
     /**
-     * Converts this SocketMessage to JSON.
+     * Converts this Envelope to JSON.
      * @returns JSON object
      */
     public toJSON(): { [k: string]: any };
 
     /**
-     * Gets the default type url for SocketMessage
+     * Gets the default type url for Envelope
      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
      * @returns The default type url
      */
@@ -212,8 +139,8 @@ export class SocketMessage implements ISocketMessage {
 /** Properties of a Ping. */
 export interface IPing {
 
-    /** Ping timestamp */
-    timestamp?: (number|Long|null);
+    /** Ping senderSendTime */
+    senderSendTime?: (number|Long|null);
 }
 
 /** Represents a Ping. */
@@ -225,8 +152,8 @@ export class Ping implements IPing {
      */
     constructor(properties?: IPing);
 
-    /** Ping timestamp. */
-    public timestamp: (number|Long);
+    /** Ping senderSendTime. */
+    public senderSendTime: (number|Long);
 
     /**
      * Creates a new Ping instance using the specified properties.
@@ -309,8 +236,14 @@ export class Ping implements IPing {
 /** Properties of a Pong. */
 export interface IPong {
 
-    /** Pong timestamp */
-    timestamp?: (number|Long|null);
+    /** Pong senderSendTime */
+    senderSendTime?: (number|Long|null);
+
+    /** Pong recieverReceiveTime */
+    recieverReceiveTime?: (number|Long|null);
+
+    /** Pong recieverSendTime */
+    recieverSendTime?: (number|Long|null);
 }
 
 /** Represents a Pong. */
@@ -322,8 +255,14 @@ export class Pong implements IPong {
      */
     constructor(properties?: IPong);
 
-    /** Pong timestamp. */
-    public timestamp: (number|Long);
+    /** Pong senderSendTime. */
+    public senderSendTime: (number|Long);
+
+    /** Pong recieverReceiveTime. */
+    public recieverReceiveTime: (number|Long);
+
+    /** Pong recieverSendTime. */
+    public recieverSendTime: (number|Long);
 
     /**
      * Creates a new Pong instance using the specified properties.
@@ -397,6 +336,304 @@ export class Pong implements IPong {
 
     /**
      * Gets the default type url for Pong
+     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+     * @returns The default type url
+     */
+    public static getTypeUrl(typeUrlPrefix?: string): string;
+}
+
+/** Properties of a Pixel. */
+export interface IPixel {
+
+    /** Pixel id */
+    id?: (number|null);
+
+    /** Pixel color */
+    color?: (number|null);
+}
+
+/** Represents a Pixel. */
+export class Pixel implements IPixel {
+
+    /**
+     * Constructs a new Pixel.
+     * @param [properties] Properties to set
+     */
+    constructor(properties?: IPixel);
+
+    /** Pixel id. */
+    public id: number;
+
+    /** Pixel color. */
+    public color: number;
+
+    /**
+     * Creates a new Pixel instance using the specified properties.
+     * @param [properties] Properties to set
+     * @returns Pixel instance
+     */
+    public static create(properties?: IPixel): Pixel;
+
+    /**
+     * Encodes the specified Pixel message. Does not implicitly {@link Pixel.verify|verify} messages.
+     * @param message Pixel message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(message: IPixel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Encodes the specified Pixel message, length delimited. Does not implicitly {@link Pixel.verify|verify} messages.
+     * @param message Pixel message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encodeDelimited(message: IPixel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Decodes a Pixel message from the specified reader or buffer.
+     * @param reader Reader or buffer to decode from
+     * @param [length] Message length if known beforehand
+     * @returns Pixel
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Pixel;
+
+    /**
+     * Decodes a Pixel message from the specified reader or buffer, length delimited.
+     * @param reader Reader or buffer to decode from
+     * @returns Pixel
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Pixel;
+
+    /**
+     * Verifies a Pixel message.
+     * @param message Plain object to verify
+     * @returns `null` if valid, otherwise the reason why it is not
+     */
+    public static verify(message: { [k: string]: any }): (string|null);
+
+    /**
+     * Creates a Pixel message from a plain object. Also converts values to their respective internal types.
+     * @param object Plain object
+     * @returns Pixel
+     */
+    public static fromObject(object: { [k: string]: any }): Pixel;
+
+    /**
+     * Creates a plain object from a Pixel message. Also converts values to other types if specified.
+     * @param message Pixel
+     * @param [options] Conversion options
+     * @returns Plain object
+     */
+    public static toObject(message: Pixel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+    /**
+     * Converts this Pixel to JSON.
+     * @returns JSON object
+     */
+    public toJSON(): { [k: string]: any };
+
+    /**
+     * Gets the default type url for Pixel
+     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+     * @returns The default type url
+     */
+    public static getTypeUrl(typeUrlPrefix?: string): string;
+}
+
+/** ErrorCode enum. */
+export enum ErrorCode {
+    UNKNOWN = 0,
+    PIXEL_NOT_FOUND = 100,
+    PIXEL_OUT_OF_BOUNDS = 101,
+    USER_NOT_FOUND = 200,
+    USER_COOLDOWN = 201
+}
+
+/** Represents an Error. */
+export class Error implements IError {
+
+    /**
+     * Constructs a new Error.
+     * @param [properties] Properties to set
+     */
+    constructor(properties?: IError);
+
+    /** Error code. */
+    public code: ErrorCode;
+
+    /** Error cooldown. */
+    public cooldown?: (ICooldownData|null);
+
+    /** Error data. */
+    public data?: "cooldown";
+
+    /**
+     * Creates a new Error instance using the specified properties.
+     * @param [properties] Properties to set
+     * @returns Error instance
+     */
+    public static create(properties?: IError): Error;
+
+    /**
+     * Encodes the specified Error message. Does not implicitly {@link Error.verify|verify} messages.
+     * @param message Error message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(message: IError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Encodes the specified Error message, length delimited. Does not implicitly {@link Error.verify|verify} messages.
+     * @param message Error message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encodeDelimited(message: IError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Decodes an Error message from the specified reader or buffer.
+     * @param reader Reader or buffer to decode from
+     * @param [length] Message length if known beforehand
+     * @returns Error
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Error;
+
+    /**
+     * Decodes an Error message from the specified reader or buffer, length delimited.
+     * @param reader Reader or buffer to decode from
+     * @returns Error
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Error;
+
+    /**
+     * Verifies an Error message.
+     * @param message Plain object to verify
+     * @returns `null` if valid, otherwise the reason why it is not
+     */
+    public static verify(message: { [k: string]: any }): (string|null);
+
+    /**
+     * Creates an Error message from a plain object. Also converts values to their respective internal types.
+     * @param object Plain object
+     * @returns Error
+     */
+    public static fromObject(object: { [k: string]: any }): Error;
+
+    /**
+     * Creates a plain object from an Error message. Also converts values to other types if specified.
+     * @param message Error
+     * @param [options] Conversion options
+     * @returns Plain object
+     */
+    public static toObject(message: Error, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+    /**
+     * Converts this Error to JSON.
+     * @returns JSON object
+     */
+    public toJSON(): { [k: string]: any };
+
+    /**
+     * Gets the default type url for Error
+     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+     * @returns The default type url
+     */
+    public static getTypeUrl(typeUrlPrefix?: string): string;
+}
+
+/** Represents a CooldownData. */
+export class CooldownData implements ICooldownData {
+
+    /**
+     * Constructs a new CooldownData.
+     * @param [properties] Properties to set
+     */
+    constructor(properties?: ICooldownData);
+
+    /** CooldownData until. */
+    public until: (number|Long);
+
+    /**
+     * Creates a new CooldownData instance using the specified properties.
+     * @param [properties] Properties to set
+     * @returns CooldownData instance
+     */
+    public static create(properties?: ICooldownData): CooldownData;
+
+    /**
+     * Encodes the specified CooldownData message. Does not implicitly {@link CooldownData.verify|verify} messages.
+     * @param message CooldownData message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(message: ICooldownData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Encodes the specified CooldownData message, length delimited. Does not implicitly {@link CooldownData.verify|verify} messages.
+     * @param message CooldownData message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encodeDelimited(message: ICooldownData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Decodes a CooldownData message from the specified reader or buffer.
+     * @param reader Reader or buffer to decode from
+     * @param [length] Message length if known beforehand
+     * @returns CooldownData
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): CooldownData;
+
+    /**
+     * Decodes a CooldownData message from the specified reader or buffer, length delimited.
+     * @param reader Reader or buffer to decode from
+     * @returns CooldownData
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): CooldownData;
+
+    /**
+     * Verifies a CooldownData message.
+     * @param message Plain object to verify
+     * @returns `null` if valid, otherwise the reason why it is not
+     */
+    public static verify(message: { [k: string]: any }): (string|null);
+
+    /**
+     * Creates a CooldownData message from a plain object. Also converts values to their respective internal types.
+     * @param object Plain object
+     * @returns CooldownData
+     */
+    public static fromObject(object: { [k: string]: any }): CooldownData;
+
+    /**
+     * Creates a plain object from a CooldownData message. Also converts values to other types if specified.
+     * @param message CooldownData
+     * @param [options] Conversion options
+     * @returns Plain object
+     */
+    public static toObject(message: CooldownData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+    /**
+     * Converts this CooldownData to JSON.
+     * @returns JSON object
+     */
+    public toJSON(): { [k: string]: any };
+
+    /**
+     * Gets the default type url for CooldownData
      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
      * @returns The default type url
      */
