@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+import "ping-pong.proto";
+import "pixel.proto";
+import "error.proto";
+
+message Envelope {
+    uint32 id = 1;
+    int64 timestamp = 2;
+    uint32 correlationId = 3;
+
+    oneof payload {
+        //ClientPayload clientPayload = 4;
+        //ServerPayload serverPayload = 5;
+        Ping ping = 6;
+        Pong pong = 7;
+        Pixel pixel = 8;
+        Error error = 9;
+    }
+}

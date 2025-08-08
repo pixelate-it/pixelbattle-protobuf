@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+enum ErrorCode {
+    UNKNOWN = 0;
+
+    PIXEL_NOT_FOUND = 100;
+    PIXEL_OUT_OF_BOUNDS = 101;
+
+    USER_NOT_FOUND = 200;
+    USER_COOLDOWN = 201;
+}
+
+message Error {
+    ErrorCode code = 1;
+    oneof data {
+        CooldownData cooldown = 2;
+    }
+}
+
+message CooldownData {
+    int64 until = 1;
+}
