@@ -14,9 +14,14 @@ message Error {
     ErrorCode code = 1;
     oneof data {
         CooldownData cooldown = 2;
+        BoundsData bounds = 3;
     }
 }
 
 message CooldownData {
     int64 until = 1;
+}
+
+message BoundsData {
+    int32 max = 1;
 }
