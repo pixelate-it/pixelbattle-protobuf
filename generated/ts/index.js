@@ -57,11 +57,11 @@ $root.Envelope = (function() {
 
     /**
      * Envelope correlationId.
-     * @member {number} correlationId
+     * @member {number|null|undefined} correlationId
      * @memberof Envelope
      * @instance
      */
-    Envelope.prototype.correlationId = 0;
+    Envelope.prototype.correlationId = null;
 
     /**
      * Envelope ping.
@@ -97,6 +97,17 @@ $root.Envelope = (function() {
 
     // OneOf field names bound to virtual getters and setters
     var $oneOfFields;
+
+    /**
+     * Envelope _correlationId.
+     * @member {"correlationId"|undefined} _correlationId
+     * @memberof Envelope
+     * @instance
+     */
+    Object.defineProperty(Envelope.prototype, "_correlationId", {
+        get: $util.oneOfGetter($oneOfFields = ["correlationId"]),
+        set: $util.oneOfSetter($oneOfFields)
+    });
 
     /**
      * Envelope payload.
@@ -140,13 +151,13 @@ $root.Envelope = (function() {
         if (message.correlationId != null && Object.hasOwnProperty.call(message, "correlationId"))
             writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.correlationId);
         if (message.ping != null && Object.hasOwnProperty.call(message, "ping"))
-            $root.Ping.encode(message.ping, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+            $root.Ping.encode(message.ping, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
         if (message.pong != null && Object.hasOwnProperty.call(message, "pong"))
-            $root.Pong.encode(message.pong, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+            $root.Pong.encode(message.pong, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
         if (message.pixel != null && Object.hasOwnProperty.call(message, "pixel"))
-            $root.Pixel.encode(message.pixel, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+            $root.Pixel.encode(message.pixel, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
         if (message.error != null && Object.hasOwnProperty.call(message, "error"))
-            $root.Error.encode(message.error, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+            $root.Error.encode(message.error, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
         return writer;
     };
 
@@ -195,19 +206,19 @@ $root.Envelope = (function() {
                     message.correlationId = reader.uint32();
                     break;
                 }
-            case 6: {
+            case 4: {
                     message.ping = $root.Ping.decode(reader, reader.uint32());
                     break;
                 }
-            case 7: {
+            case 5: {
                     message.pong = $root.Pong.decode(reader, reader.uint32());
                     break;
                 }
-            case 8: {
+            case 6: {
                     message.pixel = $root.Pixel.decode(reader, reader.uint32());
                     break;
                 }
-            case 9: {
+            case 7: {
                     message.error = $root.Error.decode(reader, reader.uint32());
                     break;
                 }
@@ -253,9 +264,11 @@ $root.Envelope = (function() {
         if (message.timestamp != null && message.hasOwnProperty("timestamp"))
             if (!$util.isInteger(message.timestamp) && !(message.timestamp && $util.isInteger(message.timestamp.low) && $util.isInteger(message.timestamp.high)))
                 return "timestamp: integer|Long expected";
-        if (message.correlationId != null && message.hasOwnProperty("correlationId"))
+        if (message.correlationId != null && message.hasOwnProperty("correlationId")) {
+            properties._correlationId = 1;
             if (!$util.isInteger(message.correlationId))
                 return "correlationId: integer expected";
+        }
         if (message.ping != null && message.hasOwnProperty("ping")) {
             properties.payload = 1;
             {
@@ -365,7 +378,6 @@ $root.Envelope = (function() {
                 object.timestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
             } else
                 object.timestamp = options.longs === String ? "0" : 0;
-            object.correlationId = 0;
         }
         if (message.id != null && message.hasOwnProperty("id"))
             object.id = message.id;
@@ -374,8 +386,11 @@ $root.Envelope = (function() {
                 object.timestamp = options.longs === String ? String(message.timestamp) : message.timestamp;
             else
                 object.timestamp = options.longs === String ? $util.Long.prototype.toString.call(message.timestamp) : options.longs === Number ? new $util.LongBits(message.timestamp.low >>> 0, message.timestamp.high >>> 0).toNumber() : message.timestamp;
-        if (message.correlationId != null && message.hasOwnProperty("correlationId"))
+        if (message.correlationId != null && message.hasOwnProperty("correlationId")) {
             object.correlationId = message.correlationId;
+            if (options.oneofs)
+                object._correlationId = "correlationId";
+        }
         if (message.ping != null && message.hasOwnProperty("ping")) {
             object.ping = $root.Ping.toObject(message.ping, options);
             if (options.oneofs)

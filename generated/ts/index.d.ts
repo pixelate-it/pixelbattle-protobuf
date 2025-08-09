@@ -41,7 +41,7 @@ export class Envelope implements IEnvelope {
     public timestamp: (number|Long);
 
     /** Envelope correlationId. */
-    public correlationId: number;
+    public correlationId?: (number|null);
 
     /** Envelope ping. */
     public ping?: (IPing|null);
@@ -54,6 +54,9 @@ export class Envelope implements IEnvelope {
 
     /** Envelope error. */
     public error?: (IError|null);
+
+    /** Envelope _correlationId. */
+    public _correlationId?: "correlationId";
 
     /** Envelope payload. */
     public payload?: ("ping"|"pong"|"pixel"|"error");
