@@ -3,6 +3,6 @@ set -e
 
 rm -rf generated/*
 
-mkdir -p generated/ts
-pbjs -t static-module -w commonjs -o generated/ts/index.js proto/*.proto
-pbts -o generated/ts/index.d.ts generated/ts/index.js
+mkdir -p generated/js
+pbjs -t static-module -w es6 -o generated/js/index.js proto/*.proto
+pbts -o generated/js/index.d.ts generated/js/index.js
