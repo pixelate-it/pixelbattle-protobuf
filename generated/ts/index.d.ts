@@ -469,8 +469,11 @@ export class Error implements IError {
     /** Error cooldown. */
     public cooldown?: (ICooldownData|null);
 
+    /** Error bounds. */
+    public bounds?: (IBoundsData|null);
+
     /** Error data. */
-    public data?: "cooldown";
+    public data?: ("cooldown"|"bounds");
 
     /**
      * Creates a new Error instance using the specified properties.
@@ -634,6 +637,96 @@ export class CooldownData implements ICooldownData {
 
     /**
      * Gets the default type url for CooldownData
+     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+     * @returns The default type url
+     */
+    public static getTypeUrl(typeUrlPrefix?: string): string;
+}
+
+/** Represents a BoundsData. */
+export class BoundsData implements IBoundsData {
+
+    /**
+     * Constructs a new BoundsData.
+     * @param [properties] Properties to set
+     */
+    constructor(properties?: IBoundsData);
+
+    /** BoundsData max. */
+    public max: number;
+
+    /**
+     * Creates a new BoundsData instance using the specified properties.
+     * @param [properties] Properties to set
+     * @returns BoundsData instance
+     */
+    public static create(properties?: IBoundsData): BoundsData;
+
+    /**
+     * Encodes the specified BoundsData message. Does not implicitly {@link BoundsData.verify|verify} messages.
+     * @param message BoundsData message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(message: IBoundsData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Encodes the specified BoundsData message, length delimited. Does not implicitly {@link BoundsData.verify|verify} messages.
+     * @param message BoundsData message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encodeDelimited(message: IBoundsData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Decodes a BoundsData message from the specified reader or buffer.
+     * @param reader Reader or buffer to decode from
+     * @param [length] Message length if known beforehand
+     * @returns BoundsData
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): BoundsData;
+
+    /**
+     * Decodes a BoundsData message from the specified reader or buffer, length delimited.
+     * @param reader Reader or buffer to decode from
+     * @returns BoundsData
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): BoundsData;
+
+    /**
+     * Verifies a BoundsData message.
+     * @param message Plain object to verify
+     * @returns `null` if valid, otherwise the reason why it is not
+     */
+    public static verify(message: { [k: string]: any }): (string|null);
+
+    /**
+     * Creates a BoundsData message from a plain object. Also converts values to their respective internal types.
+     * @param object Plain object
+     * @returns BoundsData
+     */
+    public static fromObject(object: { [k: string]: any }): BoundsData;
+
+    /**
+     * Creates a plain object from a BoundsData message. Also converts values to other types if specified.
+     * @param message BoundsData
+     * @param [options] Conversion options
+     * @returns Plain object
+     */
+    public static toObject(message: BoundsData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+    /**
+     * Converts this BoundsData to JSON.
+     * @returns JSON object
+     */
+    public toJSON(): { [k: string]: any };
+
+    /**
+     * Gets the default type url for BoundsData
      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
      * @returns The default type url
      */

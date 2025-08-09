@@ -1198,6 +1198,7 @@ $root.Error = (function() {
      * @interface IError
      * @property {ErrorCode|null} [code] Error code
      * @property {ICooldownData|null} [cooldown] Error cooldown
+     * @property {IBoundsData|null} [bounds] Error bounds
      */
 
     /**
@@ -1231,17 +1232,25 @@ $root.Error = (function() {
      */
     Error.prototype.cooldown = null;
 
+    /**
+     * Error bounds.
+     * @member {IBoundsData|null|undefined} bounds
+     * @memberof Error
+     * @instance
+     */
+    Error.prototype.bounds = null;
+
     // OneOf field names bound to virtual getters and setters
     var $oneOfFields;
 
     /**
      * Error data.
-     * @member {"cooldown"|undefined} data
+     * @member {"cooldown"|"bounds"|undefined} data
      * @memberof Error
      * @instance
      */
     Object.defineProperty(Error.prototype, "data", {
-        get: $util.oneOfGetter($oneOfFields = ["cooldown"]),
+        get: $util.oneOfGetter($oneOfFields = ["cooldown", "bounds"]),
         set: $util.oneOfSetter($oneOfFields)
     });
 
@@ -1273,6 +1282,8 @@ $root.Error = (function() {
             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
         if (message.cooldown != null && Object.hasOwnProperty.call(message, "cooldown"))
             $root.CooldownData.encode(message.cooldown, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+        if (message.bounds != null && Object.hasOwnProperty.call(message, "bounds"))
+            $root.BoundsData.encode(message.bounds, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
         return writer;
     };
 
@@ -1315,6 +1326,10 @@ $root.Error = (function() {
                 }
             case 2: {
                     message.cooldown = $root.CooldownData.decode(reader, reader.uint32());
+                    break;
+                }
+            case 3: {
+                    message.bounds = $root.BoundsData.decode(reader, reader.uint32());
                     break;
                 }
             default:
@@ -1372,6 +1387,16 @@ $root.Error = (function() {
                     return "cooldown." + error;
             }
         }
+        if (message.bounds != null && message.hasOwnProperty("bounds")) {
+            if (properties.data === 1)
+                return "data: multiple values";
+            properties.data = 1;
+            {
+                var error = $root.BoundsData.verify(message.bounds);
+                if (error)
+                    return "bounds." + error;
+            }
+        }
         return null;
     };
 
@@ -1420,6 +1445,11 @@ $root.Error = (function() {
                 throw TypeError(".Error.cooldown: object expected");
             message.cooldown = $root.CooldownData.fromObject(object.cooldown);
         }
+        if (object.bounds != null) {
+            if (typeof object.bounds !== "object")
+                throw TypeError(".Error.bounds: object expected");
+            message.bounds = $root.BoundsData.fromObject(object.bounds);
+        }
         return message;
     };
 
@@ -1444,6 +1474,11 @@ $root.Error = (function() {
             object.cooldown = $root.CooldownData.toObject(message.cooldown, options);
             if (options.oneofs)
                 object.data = "cooldown";
+        }
+        if (message.bounds != null && message.hasOwnProperty("bounds")) {
+            object.bounds = $root.BoundsData.toObject(message.bounds, options);
+            if (options.oneofs)
+                object.data = "bounds";
         }
         return object;
     };
@@ -1694,6 +1729,211 @@ $root.CooldownData = (function() {
     };
 
     return CooldownData;
+})();
+
+$root.BoundsData = (function() {
+
+    /**
+     * Properties of a BoundsData.
+     * @exports IBoundsData
+     * @interface IBoundsData
+     * @property {number|null} [max] BoundsData max
+     */
+
+    /**
+     * Constructs a new BoundsData.
+     * @exports BoundsData
+     * @classdesc Represents a BoundsData.
+     * @implements IBoundsData
+     * @constructor
+     * @param {IBoundsData=} [properties] Properties to set
+     */
+    function BoundsData(properties) {
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * BoundsData max.
+     * @member {number} max
+     * @memberof BoundsData
+     * @instance
+     */
+    BoundsData.prototype.max = 0;
+
+    /**
+     * Creates a new BoundsData instance using the specified properties.
+     * @function create
+     * @memberof BoundsData
+     * @static
+     * @param {IBoundsData=} [properties] Properties to set
+     * @returns {BoundsData} BoundsData instance
+     */
+    BoundsData.create = function create(properties) {
+        return new BoundsData(properties);
+    };
+
+    /**
+     * Encodes the specified BoundsData message. Does not implicitly {@link BoundsData.verify|verify} messages.
+     * @function encode
+     * @memberof BoundsData
+     * @static
+     * @param {IBoundsData} message BoundsData message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    BoundsData.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        if (message.max != null && Object.hasOwnProperty.call(message, "max"))
+            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.max);
+        return writer;
+    };
+
+    /**
+     * Encodes the specified BoundsData message, length delimited. Does not implicitly {@link BoundsData.verify|verify} messages.
+     * @function encodeDelimited
+     * @memberof BoundsData
+     * @static
+     * @param {IBoundsData} message BoundsData message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    BoundsData.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes a BoundsData message from the specified reader or buffer.
+     * @function decode
+     * @memberof BoundsData
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {BoundsData} BoundsData
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    BoundsData.decode = function decode(reader, length, error) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.BoundsData();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            if (tag === error)
+                break;
+            switch (tag >>> 3) {
+            case 1: {
+                    message.max = reader.int32();
+                    break;
+                }
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes a BoundsData message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof BoundsData
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {BoundsData} BoundsData
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    BoundsData.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies a BoundsData message.
+     * @function verify
+     * @memberof BoundsData
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    BoundsData.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        if (message.max != null && message.hasOwnProperty("max"))
+            if (!$util.isInteger(message.max))
+                return "max: integer expected";
+        return null;
+    };
+
+    /**
+     * Creates a BoundsData message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof BoundsData
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {BoundsData} BoundsData
+     */
+    BoundsData.fromObject = function fromObject(object) {
+        if (object instanceof $root.BoundsData)
+            return object;
+        var message = new $root.BoundsData();
+        if (object.max != null)
+            message.max = object.max | 0;
+        return message;
+    };
+
+    /**
+     * Creates a plain object from a BoundsData message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof BoundsData
+     * @static
+     * @param {BoundsData} message BoundsData
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    BoundsData.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.defaults)
+            object.max = 0;
+        if (message.max != null && message.hasOwnProperty("max"))
+            object.max = message.max;
+        return object;
+    };
+
+    /**
+     * Converts this BoundsData to JSON.
+     * @function toJSON
+     * @memberof BoundsData
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    BoundsData.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    /**
+     * Gets the default type url for BoundsData
+     * @function getTypeUrl
+     * @memberof BoundsData
+     * @static
+     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+     * @returns {string} The default type url
+     */
+    BoundsData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        if (typeUrlPrefix === undefined) {
+            typeUrlPrefix = "type.googleapis.com";
+        }
+        return typeUrlPrefix + "/BoundsData";
+    };
+
+    return BoundsData;
 })();
 
 module.exports = $root;
