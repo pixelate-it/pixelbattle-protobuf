@@ -1,15 +1,13 @@
 /*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
-"use strict";
-
-var $protobuf = require("protobufjs/minimal");
+import * as $protobuf from "protobufjs/minimal";
 
 // Common aliases
-var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
+const $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
 
 // Exported root namespace
-var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
+const $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
-$root.Envelope = (function() {
+export const Envelope = $root.Envelope = (() => {
 
     /**
      * Properties of an Envelope.
@@ -34,7 +32,7 @@ $root.Envelope = (function() {
      */
     function Envelope(properties) {
         if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                 if (properties[keys[i]] != null)
                     this[keys[i]] = properties[keys[i]];
     }
@@ -96,7 +94,7 @@ $root.Envelope = (function() {
     Envelope.prototype.error = null;
 
     // OneOf field names bound to virtual getters and setters
-    var $oneOfFields;
+    let $oneOfFields;
 
     /**
      * Envelope _correlationId.
@@ -188,9 +186,9 @@ $root.Envelope = (function() {
     Envelope.decode = function decode(reader, length, error) {
         if (!(reader instanceof $Reader))
             reader = $Reader.create(reader);
-        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Envelope();
+        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.Envelope();
         while (reader.pos < end) {
-            var tag = reader.uint32();
+            let tag = reader.uint32();
             if (tag === error)
                 break;
             switch (tag >>> 3) {
@@ -257,7 +255,7 @@ $root.Envelope = (function() {
     Envelope.verify = function verify(message) {
         if (typeof message !== "object" || message === null)
             return "object expected";
-        var properties = {};
+        let properties = {};
         if (message.id != null && message.hasOwnProperty("id"))
             if (!$util.isInteger(message.id))
                 return "id: integer expected";
@@ -272,7 +270,7 @@ $root.Envelope = (function() {
         if (message.ping != null && message.hasOwnProperty("ping")) {
             properties.payload = 1;
             {
-                var error = $root.Ping.verify(message.ping);
+                let error = $root.Ping.verify(message.ping);
                 if (error)
                     return "ping." + error;
             }
@@ -282,7 +280,7 @@ $root.Envelope = (function() {
                 return "payload: multiple values";
             properties.payload = 1;
             {
-                var error = $root.Pong.verify(message.pong);
+                let error = $root.Pong.verify(message.pong);
                 if (error)
                     return "pong." + error;
             }
@@ -292,7 +290,7 @@ $root.Envelope = (function() {
                 return "payload: multiple values";
             properties.payload = 1;
             {
-                var error = $root.Pixel.verify(message.pixel);
+                let error = $root.Pixel.verify(message.pixel);
                 if (error)
                     return "pixel." + error;
             }
@@ -302,7 +300,7 @@ $root.Envelope = (function() {
                 return "payload: multiple values";
             properties.payload = 1;
             {
-                var error = $root.Error.verify(message.error);
+                let error = $root.Error.verify(message.error);
                 if (error)
                     return "error." + error;
             }
@@ -321,7 +319,7 @@ $root.Envelope = (function() {
     Envelope.fromObject = function fromObject(object) {
         if (object instanceof $root.Envelope)
             return object;
-        var message = new $root.Envelope();
+        let message = new $root.Envelope();
         if (object.id != null)
             message.id = object.id >>> 0;
         if (object.timestamp != null)
@@ -370,11 +368,11 @@ $root.Envelope = (function() {
     Envelope.toObject = function toObject(message, options) {
         if (!options)
             options = {};
-        var object = {};
+        let object = {};
         if (options.defaults) {
             object.id = 0;
             if ($util.Long) {
-                var long = new $util.Long(0, 0, false);
+                let long = new $util.Long(0, 0, false);
                 object.timestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
             } else
                 object.timestamp = options.longs === String ? "0" : 0;
@@ -443,7 +441,7 @@ $root.Envelope = (function() {
     return Envelope;
 })();
 
-$root.Ping = (function() {
+export const Ping = $root.Ping = (() => {
 
     /**
      * Properties of a Ping.
@@ -462,7 +460,7 @@ $root.Ping = (function() {
      */
     function Ping(properties) {
         if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                 if (properties[keys[i]] != null)
                     this[keys[i]] = properties[keys[i]];
     }
@@ -531,9 +529,9 @@ $root.Ping = (function() {
     Ping.decode = function decode(reader, length, error) {
         if (!(reader instanceof $Reader))
             reader = $Reader.create(reader);
-        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Ping();
+        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.Ping();
         while (reader.pos < end) {
-            var tag = reader.uint32();
+            let tag = reader.uint32();
             if (tag === error)
                 break;
             switch (tag >>> 3) {
@@ -593,7 +591,7 @@ $root.Ping = (function() {
     Ping.fromObject = function fromObject(object) {
         if (object instanceof $root.Ping)
             return object;
-        var message = new $root.Ping();
+        let message = new $root.Ping();
         if (object.senderSendTime != null)
             if ($util.Long)
                 (message.senderSendTime = $util.Long.fromValue(object.senderSendTime)).unsigned = false;
@@ -618,10 +616,10 @@ $root.Ping = (function() {
     Ping.toObject = function toObject(message, options) {
         if (!options)
             options = {};
-        var object = {};
+        let object = {};
         if (options.defaults)
             if ($util.Long) {
-                var long = new $util.Long(0, 0, false);
+                let long = new $util.Long(0, 0, false);
                 object.senderSendTime = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
             } else
                 object.senderSendTime = options.longs === String ? "0" : 0;
@@ -662,7 +660,7 @@ $root.Ping = (function() {
     return Ping;
 })();
 
-$root.Pong = (function() {
+export const Pong = $root.Pong = (() => {
 
     /**
      * Properties of a Pong.
@@ -683,7 +681,7 @@ $root.Pong = (function() {
      */
     function Pong(properties) {
         if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                 if (properties[keys[i]] != null)
                     this[keys[i]] = properties[keys[i]];
     }
@@ -772,9 +770,9 @@ $root.Pong = (function() {
     Pong.decode = function decode(reader, length, error) {
         if (!(reader instanceof $Reader))
             reader = $Reader.create(reader);
-        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Pong();
+        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.Pong();
         while (reader.pos < end) {
-            var tag = reader.uint32();
+            let tag = reader.uint32();
             if (tag === error)
                 break;
             switch (tag >>> 3) {
@@ -848,7 +846,7 @@ $root.Pong = (function() {
     Pong.fromObject = function fromObject(object) {
         if (object instanceof $root.Pong)
             return object;
-        var message = new $root.Pong();
+        let message = new $root.Pong();
         if (object.senderSendTime != null)
             if ($util.Long)
                 (message.senderSendTime = $util.Long.fromValue(object.senderSendTime)).unsigned = false;
@@ -891,20 +889,20 @@ $root.Pong = (function() {
     Pong.toObject = function toObject(message, options) {
         if (!options)
             options = {};
-        var object = {};
+        let object = {};
         if (options.defaults) {
             if ($util.Long) {
-                var long = new $util.Long(0, 0, false);
+                let long = new $util.Long(0, 0, false);
                 object.senderSendTime = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
             } else
                 object.senderSendTime = options.longs === String ? "0" : 0;
             if ($util.Long) {
-                var long = new $util.Long(0, 0, false);
+                let long = new $util.Long(0, 0, false);
                 object.recieverReceiveTime = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
             } else
                 object.recieverReceiveTime = options.longs === String ? "0" : 0;
             if ($util.Long) {
-                var long = new $util.Long(0, 0, false);
+                let long = new $util.Long(0, 0, false);
                 object.recieverSendTime = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
             } else
                 object.recieverSendTime = options.longs === String ? "0" : 0;
@@ -956,7 +954,7 @@ $root.Pong = (function() {
     return Pong;
 })();
 
-$root.Pixel = (function() {
+export const Pixel = $root.Pixel = (() => {
 
     /**
      * Properties of a Pixel.
@@ -976,7 +974,7 @@ $root.Pixel = (function() {
      */
     function Pixel(properties) {
         if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                 if (properties[keys[i]] != null)
                     this[keys[i]] = properties[keys[i]];
     }
@@ -1055,9 +1053,9 @@ $root.Pixel = (function() {
     Pixel.decode = function decode(reader, length, error) {
         if (!(reader instanceof $Reader))
             reader = $Reader.create(reader);
-        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Pixel();
+        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.Pixel();
         while (reader.pos < end) {
-            var tag = reader.uint32();
+            let tag = reader.uint32();
             if (tag === error)
                 break;
             switch (tag >>> 3) {
@@ -1124,7 +1122,7 @@ $root.Pixel = (function() {
     Pixel.fromObject = function fromObject(object) {
         if (object instanceof $root.Pixel)
             return object;
-        var message = new $root.Pixel();
+        let message = new $root.Pixel();
         if (object.id != null)
             message.id = object.id | 0;
         if (object.color != null)
@@ -1144,7 +1142,7 @@ $root.Pixel = (function() {
     Pixel.toObject = function toObject(message, options) {
         if (!options)
             options = {};
-        var object = {};
+        let object = {};
         if (options.defaults) {
             object.id = 0;
             object.color = 0;
@@ -1195,8 +1193,8 @@ $root.Pixel = (function() {
  * @property {number} USER_NOT_FOUND=200 USER_NOT_FOUND value
  * @property {number} USER_COOLDOWN=201 USER_COOLDOWN value
  */
-$root.ErrorCode = (function() {
-    var valuesById = {}, values = Object.create(valuesById);
+export const ErrorCode = $root.ErrorCode = (() => {
+    const valuesById = {}, values = Object.create(valuesById);
     values[valuesById[0] = "UNKNOWN"] = 0;
     values[valuesById[100] = "PIXEL_NOT_FOUND"] = 100;
     values[valuesById[101] = "PIXEL_OUT_OF_BOUNDS"] = 101;
@@ -1205,7 +1203,7 @@ $root.ErrorCode = (function() {
     return values;
 })();
 
-$root.Error = (function() {
+export const Error = $root.Error = (() => {
 
     /**
      * Properties of an Error.
@@ -1226,7 +1224,7 @@ $root.Error = (function() {
      */
     function Error(properties) {
         if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                 if (properties[keys[i]] != null)
                     this[keys[i]] = properties[keys[i]];
     }
@@ -1256,7 +1254,7 @@ $root.Error = (function() {
     Error.prototype.bounds = null;
 
     // OneOf field names bound to virtual getters and setters
-    var $oneOfFields;
+    let $oneOfFields;
 
     /**
      * Error data.
@@ -1329,9 +1327,9 @@ $root.Error = (function() {
     Error.decode = function decode(reader, length, error) {
         if (!(reader instanceof $Reader))
             reader = $Reader.create(reader);
-        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Error();
+        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.Error();
         while (reader.pos < end) {
-            var tag = reader.uint32();
+            let tag = reader.uint32();
             if (tag === error)
                 break;
             switch (tag >>> 3) {
@@ -1382,7 +1380,7 @@ $root.Error = (function() {
     Error.verify = function verify(message) {
         if (typeof message !== "object" || message === null)
             return "object expected";
-        var properties = {};
+        let properties = {};
         if (message.code != null && message.hasOwnProperty("code"))
             switch (message.code) {
             default:
@@ -1397,7 +1395,7 @@ $root.Error = (function() {
         if (message.cooldown != null && message.hasOwnProperty("cooldown")) {
             properties.data = 1;
             {
-                var error = $root.CooldownData.verify(message.cooldown);
+                let error = $root.CooldownData.verify(message.cooldown);
                 if (error)
                     return "cooldown." + error;
             }
@@ -1407,7 +1405,7 @@ $root.Error = (function() {
                 return "data: multiple values";
             properties.data = 1;
             {
-                var error = $root.BoundsData.verify(message.bounds);
+                let error = $root.BoundsData.verify(message.bounds);
                 if (error)
                     return "bounds." + error;
             }
@@ -1426,7 +1424,7 @@ $root.Error = (function() {
     Error.fromObject = function fromObject(object) {
         if (object instanceof $root.Error)
             return object;
-        var message = new $root.Error();
+        let message = new $root.Error();
         switch (object.code) {
         default:
             if (typeof object.code === "number") {
@@ -1480,7 +1478,7 @@ $root.Error = (function() {
     Error.toObject = function toObject(message, options) {
         if (!options)
             options = {};
-        var object = {};
+        let object = {};
         if (options.defaults)
             object.code = options.enums === String ? "UNKNOWN" : 0;
         if (message.code != null && message.hasOwnProperty("code"))
@@ -1527,7 +1525,7 @@ $root.Error = (function() {
     return Error;
 })();
 
-$root.CooldownData = (function() {
+export const CooldownData = $root.CooldownData = (() => {
 
     /**
      * Properties of a CooldownData.
@@ -1546,7 +1544,7 @@ $root.CooldownData = (function() {
      */
     function CooldownData(properties) {
         if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                 if (properties[keys[i]] != null)
                     this[keys[i]] = properties[keys[i]];
     }
@@ -1615,9 +1613,9 @@ $root.CooldownData = (function() {
     CooldownData.decode = function decode(reader, length, error) {
         if (!(reader instanceof $Reader))
             reader = $Reader.create(reader);
-        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CooldownData();
+        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.CooldownData();
         while (reader.pos < end) {
-            var tag = reader.uint32();
+            let tag = reader.uint32();
             if (tag === error)
                 break;
             switch (tag >>> 3) {
@@ -1677,7 +1675,7 @@ $root.CooldownData = (function() {
     CooldownData.fromObject = function fromObject(object) {
         if (object instanceof $root.CooldownData)
             return object;
-        var message = new $root.CooldownData();
+        let message = new $root.CooldownData();
         if (object.until != null)
             if ($util.Long)
                 (message.until = $util.Long.fromValue(object.until)).unsigned = false;
@@ -1702,10 +1700,10 @@ $root.CooldownData = (function() {
     CooldownData.toObject = function toObject(message, options) {
         if (!options)
             options = {};
-        var object = {};
+        let object = {};
         if (options.defaults)
             if ($util.Long) {
-                var long = new $util.Long(0, 0, false);
+                let long = new $util.Long(0, 0, false);
                 object.until = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
             } else
                 object.until = options.longs === String ? "0" : 0;
@@ -1746,7 +1744,7 @@ $root.CooldownData = (function() {
     return CooldownData;
 })();
 
-$root.BoundsData = (function() {
+export const BoundsData = $root.BoundsData = (() => {
 
     /**
      * Properties of a BoundsData.
@@ -1765,7 +1763,7 @@ $root.BoundsData = (function() {
      */
     function BoundsData(properties) {
         if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                 if (properties[keys[i]] != null)
                     this[keys[i]] = properties[keys[i]];
     }
@@ -1834,9 +1832,9 @@ $root.BoundsData = (function() {
     BoundsData.decode = function decode(reader, length, error) {
         if (!(reader instanceof $Reader))
             reader = $Reader.create(reader);
-        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.BoundsData();
+        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.BoundsData();
         while (reader.pos < end) {
-            var tag = reader.uint32();
+            let tag = reader.uint32();
             if (tag === error)
                 break;
             switch (tag >>> 3) {
@@ -1896,7 +1894,7 @@ $root.BoundsData = (function() {
     BoundsData.fromObject = function fromObject(object) {
         if (object instanceof $root.BoundsData)
             return object;
-        var message = new $root.BoundsData();
+        let message = new $root.BoundsData();
         if (object.max != null)
             message.max = object.max | 0;
         return message;
@@ -1914,7 +1912,7 @@ $root.BoundsData = (function() {
     BoundsData.toObject = function toObject(message, options) {
         if (!options)
             options = {};
-        var object = {};
+        let object = {};
         if (options.defaults)
             object.max = 0;
         if (message.max != null && message.hasOwnProperty("max"))
@@ -1951,4 +1949,4 @@ $root.BoundsData = (function() {
     return BoundsData;
 })();
 
-module.exports = $root;
+export { $root as default };
